@@ -16,8 +16,8 @@ export default function Main() {
         </div>
       </div>
       <div className="caption text-center">
-        <h1>upiko</h1>
-        <h3>great web products, without the evil</h3>
+        <h1>esemble</h1>
+        <h3>creator cooperative</h3>
         <a className="btn btn-outline-light btn-lg" href="#overview">Learn More</a>
       </div>
       <div id="overview" className="offset">
