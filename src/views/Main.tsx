@@ -22,14 +22,16 @@ export default function Main() {
       </div>
       <div id="overview" className="offset">
         <div className="col-12 narrow text-center">
-          <h1>the world building products together</h1>
+          <h1>build it together, own it together</h1>
           <p className="lead">
-            what could we build together? esemble uses decentralized technologies (blockchain) and token based
-            rewards to enable a global creator cooperative. Come and go as you please, earn based on your contributions and work
-            with cool people on interesting projects. If you have been looking for something, come and try it out, just pick
-            up a task or join and project (you are rewarded for making a reasonable attempt). We are also trying to make
+            esemble uses decentralized technologies (blockchain) and token based
+            rewards to enable a global creator cooperative. If you are talented and efficient, we want you as part of the team.
+            Come and go as you please, earn based on your contributions and work
+            with cool people on interesting projects. If you have been looking to land your passion somewhere, come and try it out. 
+            Just pick up a task or make a proposal for the community to work on. We are also trying to make
             this a place where you can learn (and get guidance from others), so there are tasks available for all levels
-            of skills and experience.
+            of skills and experience. You will be rewarded for resonable attempts, so you can learn and earn. 
+            No central owner or company, a true cooperative of creators. For the first time, we own it, we build it.
           </p>
           <a className="btn btn-secondary btn-md" 
             onClick={() => {
@@ -43,36 +45,31 @@ export default function Main() {
         <div className="jumbotron">
           <div className="narrow">
             <div className="col-12">
-              <h3 className="heading text-center">Products</h3>
+              <h3 className="heading text-center">Platform Elements</h3>
               <div className="heading-underline"></div>
             </div>
             <div className="row text-center">
               <div className="col-md-4">
                 <div className="product">
-                  <i className="fas fa-magic fa-4x" data-fa-transform="shrink-3 up-5"></i>
-                  <h3>sos.upiko</h3>
-                  <p>Summer 2019</p> 
-                  <p>Find help immediately from experts online. Registered experts are waiting to help
-                    you with your quick challenges - from 10 mins to a less than a day of work - post the help you need and someone will help you right away
-                    in exchange for some crypto.</p>
+                  <i className="fas fa-file-invoice fa-4x" data-fa-transform="shrink-3 up-5"></i>
+                  <h3>Proposals</h3>
+                  <p>Proposals are submitted to be approved by the esemble community to be funded and worked on.</p>
                 </div>
               </div>
               <div className="col-md-4">
                 <div className="product">
-                  <i className="fas fa-hand-holding-heart fa-4x" data-fa-transform="shrink-4.5 up-4.5"></i>
-                  <h3>patron.upiko</h3>
-                  <p>Coming soon</p> 
-                  <p>Be a patron via cryptocurrency. You can provide patronage to your favorite registered
-                    thinkers and entertainers.</p>
+                  <i className="fas fa-tasks fa-4x" data-fa-transform="shrink-3 up-4.5"></i>
+                  <h3>Projects</h3>
+                  <p>Tasks and Projects submit a design to the community for review and approval and may have a subsequent build phase which may also
+                    require some review, refinement and approval before it is integrated into the platform or a project codebase.</p>
                 </div>
               </div>
               <div className="col-md-4">
                 <div className="product">
-                  <i className="fas fa-briefcase fa-4x" data-fa-transform="shrink-4 up-5"></i>
-                  <h3>services.upiko</h3>
-                  <p>Coming soon</p> 
-                  <p>Cryptocurrency based projects and services. Talented people are waiting to provide services online
-                    and help you execute your projects via our platform.
+                  <i className="fas fa-coins fa-4x" data-fa-transform="shrink-3 up-5"></i>
+                  <h3>Rewards</h3>
+                  <p>Rewards are provided in the form of the ESM (Esemble) token as well as in some cases other crypto tokens can be used as rewards (namely ETH or ERC20 tokens).
+                    You get rewarded for completing a task or a project, and will also recieve rewards for making reasonable attepts to complete the work.
                   </p>
                 </div>
               </div>

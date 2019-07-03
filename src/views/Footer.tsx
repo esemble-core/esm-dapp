@@ -7,14 +7,11 @@ export default function Footer() {
            <footer>
              <div className="row justify-content-center">
                 <div className="col-md-5 text-center">
-                  <h3>upiko</h3>
-                  <p> the future of decentralized web products
+                  <h3>esemble</h3>
+                  <p>a new way to work
                   </p>
-                  <a href="http://github.com/upiko/" target="_blank"><i className="fab fa-github"></i></a>
-                  <a href="/" target="_blank"><i className="fab fa-twitter-square"></i></a>
+                  <a href="http://github.com/esemble-core/" target="_blank"><i className="fab fa-github"></i></a>     
                 </div>
-
-                <hr className="socket"/>&copy; upiko.com
 
              </div>
            </footer>
@@ -22,3 +19,5 @@ export default function Footer() {
     </React.Fragment>
   )
 }
+
+//<a href="/" target="_blank"><i className="fab fa-twitter-square"></i></a>
