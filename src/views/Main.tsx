@@ -17,23 +17,26 @@ export default function Main() {
       </div>
       <div className="caption text-center">
         <h1>esemble</h1>
-        <h3>creator cooperative</h3>
+        <h3>the global creator cooperative</h3>
         <a className="btn btn-outline-light btn-lg" href="#overview">Learn More</a>
       </div>
       <div id="overview" className="offset">
         <div className="col-12 narrow text-center">
-          <h1>the way it should be, just great apps. </h1>
-          <p className="lead">By employing decentralized blockchain technology, upiko is
-          developing great decentralized apps (dapps) without you having to give away your data for some comglomorate to sell. Community focused,
-          decentralized, trustless, open source and with the lowest fees in the industry plus all the while you earn crypto. 
-          We are launching our first product, <span className="strong-p">sos.upiko</span> in the summer, so sign up for the mailing list. 
+          <h1>the world building products together</h1>
+          <p className="lead">
+            what could we build together? esemble uses decentralized technologies (blockchain) and token based
+            rewards to enable a global creator cooperative. Come and go as you please, earn based on your contributions and work
+            with cool people on interesting projects. If you have been looking for something, come and try it out, just pick
+            up a task or join and project (you are rewarded for making a reasonable attempt). We are also trying to make
+            this a place where you can learn (and get guidance from others), so there are tasks available for all levels
+            of skills and experience.
           </p>
           <a className="btn btn-secondary btn-md" 
             onClick={() => {
-              alert("Coming soon :)");
+              location.assign('/projects');
             }}
           >
-          Join Mailing List</a>
+          Go to Projects & Tasks</a>
         </div>
       </div>
       <div id="products" className="offset">
