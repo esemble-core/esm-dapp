@@ -31,7 +31,7 @@ export default function Main() {
             Just pick up a task or make a proposal for the community to work on. We are also trying to make
             this a place where you can learn (and get guidance from others), so there are tasks available for all levels
             of skills and experience. You will be rewarded for resonable attempts, so you can learn and earn. 
-            No central owner or company, a true cooperative of creators. For the first time, we own it, we build it.
+            No central owner or company, a true cooperative of creators. For the first time, we build it and own it together.
           </p>
           <a className="btn btn-secondary btn-md" 
             onClick={() => {
