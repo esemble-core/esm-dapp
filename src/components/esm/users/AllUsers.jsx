@@ -1,10 +1,8 @@
 import React from 'react'
-import { Card, List, Avatar } from 'antd';
+import { Card, List } from 'antd';
 
 
-
-
-export default function AllUsers(props:any) {
+export default function AllUsers(props) {
  
   const [usersArray, setUsersArray] = React.useState([]);
 
@@ -20,15 +18,7 @@ export default function AllUsers(props:any) {
   return (
     <div style={{ background: '#ECECEC', padding: '30px' }}>
     <Card title="All Users" bordered={false} >
-      {JSON.stringify(usersArray)}
-    </Card>
-  </div>
-  )
-}
-
-
-/*
- <List
+    <List
           header="All Users"
           bordered
           dataSource={usersArray}
@@ -37,9 +27,15 @@ export default function AllUsers(props:any) {
               key={item.eth_addr}
             >
               <p className="strong-p">{item.name}</p>    
-              <p>{" | "}{item.ethAddr}</p>  
-              <p>{" | is Provider > "}{JSON.stringify(item.isProvider)}</p>                     
+              <p>{" | "}{item.eth_addr}</p>         
             </List.Item>
           )}
         />    
-*/
+    </Card>
+  </div>
+  )
+}
+
+
+
+ 
