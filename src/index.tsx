@@ -10,16 +10,13 @@ import './style.css';
 
 import Main from "./views/Main";
 import Test from './views/Test';
-/*import SoSes from './views/SoSes';
-import Users from './views/Users';
-import Providers from './views/Providers';
-import Skills from "./views/Skills";*/
 import Projects from './views/Projects';
-import Proposals from './views/Proposals';
-import Voting from './views/Voting';
 import Profile from './views/Profile';
 import Admin from './views/Admin';
-
+import GetInvolved from './views/GetInvolved';
+import Products from './views/Products';
+import StayInTouch from './views/StayInTouch';
+import HowItWorks from './views/HowItWorks';
 
 
 const RouterPage = (props: { pageComponent: JSX.Element } & RouteComponentProps) => props.pageComponent;
@@ -29,10 +26,12 @@ ReactDOM.render(
       <Router>
         <App path="/">        
             <RouterPage pageComponent={<Main />} path="/" />
+            <RouterPage pageComponent={<GetInvolved />} path="/get_involved" />
             <RouterPage pageComponent={<Projects />} path="/projects" />
-            <RouterPage pageComponent={<Proposals />} path="/proposals" />
-            <RouterPage pageComponent={<Voting />} path="/voting" />
-            <RouterPage pageComponent={<Profile />} path="/profile" />
+            <RouterPage pageComponent={<Products />} path="/products" />
+            <RouterPage pageComponent={<StayInTouch />} path="/stay_in_touch" />
+            <RouterPage pageComponent={<HowItWorks />} path="/how_it_works" />
+            <RouterPage pageComponent={<Profile />} path="/my_profile" />    
             <RouterPage pageComponent={<Admin />} path="/admin" />
             <RouterPage pageComponent={<Test />} path="/test" />  
         </App>

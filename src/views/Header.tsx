@@ -13,25 +13,28 @@ export default function Header() {
             <div className="collapse navbar-collapse" id="navbarResponsive">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <a className="nav-link" href="/">Home</a>
+                  <a className="nav-link" href="/get_involved">get involved</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/projects">Projects</a>
+                  <a className="nav-link" href="/projects">projects</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/proposals">Proposals</a>
+                  <a className="nav-link" href="/products">products</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/voting">Voting</a>
+                  <a className="nav-link" href="/stay_in_touch">stay in touch</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/profile">Profile</a>
+                  <a className="nav-link" href="/how_it_works">how it works</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/admin">Admin</a>
+                  <a className="nav-link" href="/my_profile">my profile</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/test">Test</a>
+                  <a className="nav-link" href="/admin">admin</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/test">test</a>
                 </li>
               </ul>
             </div>

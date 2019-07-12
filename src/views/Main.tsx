@@ -17,7 +17,7 @@ export default function Main() {
       </div>
       <div className="caption text-center">
         <h1>esemble</h1>
-        <h3>the global creator cooperative</h3>
+        <h3>a new way to work, together</h3>
         <a className="btn btn-outline-light btn-lg" href="#overview">Learn More</a>
       </div>
       <div id="overview" className="offset">

@@ -1,11 +1,11 @@
 import React from 'react'
 
-export default function Voting() {
+export default function Products() {
   return (
     <div className="jumbotron">
     <div className="narrow">
       <div className="col-12">
-        <h3 className="heading text-center">Voting</h3>
+        <h3 className="heading text-center">Products</h3>
         <div className="heading-underline"></div>
       </div>
     </div>
