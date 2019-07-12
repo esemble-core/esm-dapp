@@ -1,10 +1,10 @@
 import React from 'react'
-import ShowUserAccount from '../components/upiko/users/ShowUserAccount';
-import AddUserToSideChain from '../components/upiko/users/AddUserToSideChain';
-import AllUsers from '../components/upiko/users/AllUsers';
+import ShowUserAccount from '../components/esm/users/ShowUserAccount';
+import AddUserToSideChain from '../components/esm/users/AddUserToSideChain';
+import AllUsers from '../components/esm/users/AllUsers';
 import useWeb3Config from '../components/chainstate/useWeb3Config';
 import Web3Provider from 'web3-react';
-import LogUsers from '../components/upiko/users/LogUsers';
+import LogUsers from '../components/esm/users/LogUsers';
 
 
 export default function Users() {
