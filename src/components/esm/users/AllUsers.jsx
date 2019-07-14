@@ -8,10 +8,6 @@ export default function AllUsers(props) {
   const [usersArray, setUsersArray] = React.useState([]);
 
   React.useEffect(() => {
-    /*fetch('http://localhost:3210/api/v1/users')
-      .then(response => response.json())
-      .then(json => setUsersArray(json.data))
-      .catch(error => console.error(error))*/
     const loadUsers = async() => {
       console.log("loading users from api");
       const result = await axios(
