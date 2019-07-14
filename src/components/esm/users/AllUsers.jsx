@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card, List } from 'antd';
+import axios from 'axios';
 
 
 export default function AllUsers(props) {
@@ -7,11 +8,18 @@ export default function AllUsers(props) {
   const [usersArray, setUsersArray] = React.useState([]);
 
   React.useEffect(() => {
-    console.log("loading from api");
-    fetch('http://localhost:3210/api/v1/users')
+    /*fetch('http://localhost:3210/api/v1/users')
       .then(response => response.json())
       .then(json => setUsersArray(json.data))
-      .catch(error => console.error(error))
+      .catch(error => console.error(error))*/
+    const loadUsers = async() => {
+      console.log("loading users from api");
+      const result = await axios(
+        'http://localhost:3210/api/v1/users',
+      );
+      setUsersArray(result.data.data);
+    }
+    loadUsers();
   }, []);
 
 
