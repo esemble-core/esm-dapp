@@ -34,39 +34,4 @@ export interface ILoomObject {
 
 
 export interface IAppState {
-  providerState: IProviderState;
-  userState: IUser;
-  usersState: IUsers;
-  skillsList: ISkillsList;
-  ethAddr: string;
 }
-
-
-export interface ISkillsList {
-  skills: Array<ISkill>;
-}
-
-export interface ISkill {
-  skillName: string;
-}
-
-export interface IProvider {
-  name: string;
-}
-
-export interface IUsers{
-  users: Array<IUser>;
-}  
-
-export interface IUser {
-  name: string;
-  ethAddr: string;
-  isProvider: boolean;
-}
-
-export interface IProviderState {
-  providers: Array<any>;
-}
-
-
-

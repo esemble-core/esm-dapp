@@ -6,30 +6,11 @@ import {
 
 
 export enum ActionType {
-  ADD_PROVIDER = "upiko/ADD_PROVIDER",
-  FETCH_PROVIDERS_DATA = "upiko/FETCH_PROVIDERS_DATA",
-  SET_USER = "upiko/SET_USER",
-  ALL_USERS = "upiko/ALL_USERSR",
-  SKILLS_LIST = "upiko/SKILLS_LIST",
-  SET_ACCOUNT = "upiko/SET_ACCOUNT"
+  SET_ACCOUNT = "esm/SET_ACCOUNT"
 }
 
 
 const initialState: IAppState = {
-  providerState: {
-    providers: []
-  },
-  userState: {
-    name: "",
-    ethAddr: "",
-    isProvider: false
-  },
-  usersState: {
-    users: []
-  },
-  skillsList: {
-    skills: []
-  },
     ethAddr: ""
 };
 
@@ -44,21 +25,6 @@ function reducer(state: IAppState, action: IAction | any): IAppState {
       return {
         ...state, ethAddr: action.payload
       }
-    case ActionType.FETCH_PROVIDERS_DATA:
-      return { ...state, providerState: { providers: action.payload } };
-    case ActionType.SKILLS_LIST:
-      return { ...state, skillsList: { skills: action.payload } };
-    case ActionType.ALL_USERS:
-      return { ...state, usersState: { users: action.payload } };
-    case ActionType.SET_USER:
-      return { ...state, userState: action.payload };
-    case ActionType.ADD_PROVIDER:
-      return {
-        ...state,
-        providerState: {
-          providers: [...state.providerState.providers, action.payload]
-        }
-      };
     default:
       return state;
   }
