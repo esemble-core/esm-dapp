@@ -15,9 +15,12 @@ export default function AddUserToRPC() {
         `http://localhost:3210/api/v1/usersearch?eth_addr=${ethAccount}`
       );
 
-      if (result) {
+      if (result.data.status==='SUCCESS') {
         setUser(result.data);
         setUserName(result.data.data.name)
+      }else{
+        setUser({});
+        setUserName('');
       }
     };
 
