@@ -12,7 +12,7 @@ export default function AddUserToRPC() {
     const getUser = async () => {
       console.log("getting user for acct:", ethAccount);
       const result = await axios(
-        `http://localhost:3210/api/v1/usersearch?eth_addr=${ethAccount}`
+        `/api/v1/usersearch?eth_addr=${ethAccount}`
       );
 
       if (result.data.status==='SUCCESS') {
@@ -48,7 +48,7 @@ export default function AddUserToRPC() {
             type="dashed"
             onClick={async () => {
               const result = await axios.post(
-                "http://localhost:3210/api/v1/users",
+                "/api/v1/users",
                 {
                   eth_addr: ethAccount,
                   name: userName,

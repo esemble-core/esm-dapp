@@ -11,7 +11,7 @@ export default function AllUsers(props) {
     const loadUsers = async() => {
       console.log("loading users from api");
       const result = await axios(
-        'http://localhost:3210/api/v1/users',
+        '/api/v1/users',
       );
       setUsersArray(result.data.data);
     }
