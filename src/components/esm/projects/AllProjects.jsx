@@ -29,7 +29,9 @@ export default function AllProjects() {
               key={item.name}
             >
               <p className="strong-p">{item.name}</p>    
-              <p>{" | "}{item.description}</p>         
+              <p>{" | "}{item.description}</p>     
+              <p>{" | "}{item.funding}</p>   
+              <p>{" | "}{item.lifecycle}</p>            
             </List.Item>
           )}
         />    
