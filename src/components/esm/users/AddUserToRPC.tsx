@@ -2,6 +2,7 @@ import React from "react";
 import useReactWeb3 from "../../chainstate/useReactWeb3";
 import axios from "axios";
 import { Card, Input, Button } from "antd";
+import { notify } from "../../../common/Actions";
 
 export default function AddUserToRPC() {
   const ethAccount = useReactWeb3();
@@ -55,7 +56,7 @@ export default function AddUserToRPC() {
                   uuid: "a-b-c-d"
                 }
               );
-              
+              notify("user added successfully");
             }}
           >
             Create User

@@ -1,4 +1,6 @@
 import React from 'react'
+import AllProjects from '../components/esm/projects/AllProjects';
+import AddProjectToRPC from '../components/esm/projects/AddProjectToRPC';
 
 export default function Projects() {
   return (
@@ -7,6 +9,8 @@ export default function Projects() {
       <div className="col-12">
         <h3 className="heading text-center">Projects</h3>
         <div className="heading-underline"></div>
+        <AllProjects />
+        <AddProjectToRPC />
       </div>
     </div>
   </div>

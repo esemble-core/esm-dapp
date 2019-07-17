@@ -23,7 +23,7 @@ export default function AllUsers(props) {
     <div style={{ background: '#ECECEC', padding: '30px' }}>
     <Card title="All Users" bordered={false} >
     <List
-          header="All Users"
+          header="Users"
           bordered
           dataSource={usersArray}
           renderItem={item => (
