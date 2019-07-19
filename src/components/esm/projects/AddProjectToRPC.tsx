@@ -48,9 +48,7 @@ export default function AddProjectToRPC() {
                 funding: funding
               }
             );
-            
-            alert("funding" + funding);
-            notify("project proposal submitted successfully", true);
+            notify("project proposal submitted successfully");
           }}
         >
           <p className="strong-p">Enter details for new project project</p>
@@ -78,7 +76,7 @@ export default function AddProjectToRPC() {
               }}
             />
           </Form.Item>
-          <Form.Item label="Slider">
+          <Form.Item label="Project Stage">
             <Slider
               marks={{
                 0: "Not Accepted",
@@ -90,7 +88,7 @@ export default function AddProjectToRPC() {
               value={25}
             />
           </Form.Item>
-          <Form.Item label="Funding Level in ESM Tokens">
+          <Form.Item label="Requested Funding Level in ESM Tokens">
             <Radio.Group 
               onChange={(e: RadioChangeEvent) => {
                 const { name, value }: any = e.target;

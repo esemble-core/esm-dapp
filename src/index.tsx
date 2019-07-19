@@ -17,6 +17,7 @@ import GetInvolved from './views/GetInvolved';
 import Products from './views/Products';
 import StayInTouch from './views/StayInTouch';
 import HowItWorks from './views/HowItWorks';
+import Project from './views/Project';
 
 
 const RouterPage = (props: { pageComponent: JSX.Element } & RouteComponentProps) => props.pageComponent;
@@ -28,6 +29,7 @@ ReactDOM.render(
             <RouterPage pageComponent={<Main />} path="/" />
             <RouterPage pageComponent={<GetInvolved />} path="/get_involved" />
             <RouterPage pageComponent={<Projects />} path="/projects" />
+            <RouterPage pageComponent={<Project />} path="/project/:id" />
             <RouterPage pageComponent={<Products />} path="/products" />
             <RouterPage pageComponent={<StayInTouch />} path="/stay_in_touch" />
             <RouterPage pageComponent={<HowItWorks />} path="/how_it_works" />
