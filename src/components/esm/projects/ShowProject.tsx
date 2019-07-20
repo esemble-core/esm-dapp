@@ -20,7 +20,7 @@ export default function ShowProject(props:any) {
         );
         console.log("result(ShowProject)", result.data)
         setProject(result.data.data);
-        setTasks(result.data.include.tasks);
+        setTasks(result.data.include);
         }catch (error){
           console.error("Could not connect to server");
           notifyError("Could not connect to server, please try again later");
