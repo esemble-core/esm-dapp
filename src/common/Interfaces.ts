@@ -6,6 +6,13 @@
 */
 export type Dispatch = React.Dispatch<IAction>;
 
+
+export interface IUser {
+  id: number;
+  name: string;
+  description: string;
+}
+
 export interface IAction {
   type: string; //Store.ActionType enum
   payload: any;

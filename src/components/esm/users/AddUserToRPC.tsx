@@ -4,32 +4,12 @@ import axios from "axios";
 import { Card, Input, Button } from "antd";
 import { notify } from "../../../common/Actions";
 
+
 export default function AddUserToRPC() {
   const ethAccount = useReactWeb3();
-  const [user, setUser] = React.useState({});
   const [userName, setUserName] = React.useState("");
 
-  React.useEffect(() => {
-    const getUser = async () => {
-      console.log("getting user for acct:", ethAccount);
-      const result = await axios(
-        `/api/v1/usersearch?eth_addr=${ethAccount}`
-      );
-
-      if (result.data.status==='SUCCESS') {
-        setUser(result.data);
-        setUserName(result.data.data.name)
-      }else{
-        setUser({});
-        setUserName('');
-      }
-    };
-
-    if (ethAccount) {
-      getUser();
-    }
-  }, [ethAccount]);
-
+  
   return (
     <div style={{ background: "#ECECEC", padding: "30px" }}>
       <Card title="Add User" bordered={false}>
@@ -66,11 +46,3 @@ export default function AddUserToRPC() {
     </div>
   );
 }
-
-/*
- const result = await axios(
-      'http://hn.algolia.com/api/v1/search?query=redux',
-    );
-
-    setData(result.data);
-*/

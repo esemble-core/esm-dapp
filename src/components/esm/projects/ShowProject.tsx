@@ -3,10 +3,10 @@ import Axios from 'axios';
 import { notifyError } from '../../../common/Actions';
 import { Card } from 'antd';
 
+
 export default function ShowProject(props:any) {
   const [project, setProject] = React.useState({});
   const [tasks, setTasks] = React.useState({});
-
 
   React.useEffect(() => {
     const loadProj = async() => {
@@ -30,7 +30,6 @@ export default function ShowProject(props:any) {
   }, [])
   
   
-
   return (
     <div style={{ background: '#ECECEC', padding: '30px' }}>
         <Card title="Project" bordered={false} >
