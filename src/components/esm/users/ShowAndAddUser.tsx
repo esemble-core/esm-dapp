@@ -4,6 +4,7 @@ import { useUser } from './useUser';
 import AddUserToRPC from './AddUserToRPC';
 import { IUser } from './../../../common/Interfaces';
 import ShowUserDetails from './ShowUserDetails';
+import { Card } from 'antd';
 
 
 export default function ShowAndAddUser() {
@@ -19,13 +20,12 @@ export default function ShowAndAddUser() {
     }
   }, [user.id]);
 
-
   
   console.log("user currently logged in is:", user);
   return (
     <React.Fragment>
       <ShowUserDetails user={user} ethAcct={ethAcct} />
-      {noUser ? <AddUserToRPC/> : 'User'}
+      {noUser ? <AddUserToRPC/> : ''}
     </React.Fragment>
   )
 }
