@@ -22,6 +22,10 @@ export interface IProject {
   lifecycle: number;
 }
 
+export interface ITask {
+  name: string;
+}
+
 export interface IAction {
   type: string; //Store.ActionType enum
   payload: any;

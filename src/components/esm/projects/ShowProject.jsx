@@ -1,26 +1,24 @@
 import React from 'react'
 import Axios from 'axios';
 import { notifyError } from '../../../common/Actions';
-import { Card, Button } from 'antd';
-import { IProject } from '../../../common/Interfaces';
+import { Card, Button, List } from 'antd';
 
 
-
-export default function ShowProject(props:any) {
-  const [project, setProject] = React.useState<IProject | any>({});
-  const [tasks, setTasks] = React.useState({});
+export default function ShowProject(props) {
+  const [project, setProject] = React.useState({});
+  const [tasks, setTasks] = React.useState([]);
   const [showAddTasks, setShowAddTasks] = React.useState(false);
 
   React.useEffect(() => {
     const loadProj = async() => {
-      let url = new String(window.location);
+      let url = window.location.toString();
       let projectId = url.split("/").pop();
 
       try{
         const result = await Axios(
           `/api/v1/projects/${projectId}`, {params: {with_tasks: true}},
         );
-        console.log("result(ShowProject)", result.data)
+        //console.log("result(ShowProject)", result.data)
         setProject(result.data.data);
         setTasks(result.data.include);
         }catch (error){
@@ -44,7 +42,22 @@ export default function ShowProject(props:any) {
       </div>
       
       <div style={{ background: '#ECECEC', padding: '30px' }}>
-        <Card title="Tasks" bordered={false}> 
+        <Card title="Tasks for Project" bordered={false}> 
+
+        <List
+          header="Tasks"
+          bordered
+          dataSource={tasks}
+          renderItem={item => (
+            <List.Item 
+              key={item.name}
+            >
+              <p className="strong-p">{item.name}</p>    
+           
+            </List.Item>
+          )}
+        />    
+
 
         <Button
             type="dashed"
@@ -63,17 +76,10 @@ export default function ShowProject(props:any) {
 }
 
 
-/*
-  Move to the parent
-  the add button
-  the state of whether to show it
-  the addtaks() component
-*/
-
 export function addtask() {
   return(
     <div style={{ background: '#ECECEC', padding: '30px' }}>
-    <Card title="AddTask" bordered={false}> 
+    <Card title="Add New Task" bordered={false}> 
       <p>ADD</p>
       <Button
             type="dashed"
@@ -82,7 +88,7 @@ export function addtask() {
               
             }}
           >
-             Done
+             Add
           </Button>
     </Card>
   </div>
