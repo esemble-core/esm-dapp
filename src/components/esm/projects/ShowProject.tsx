@@ -9,12 +9,12 @@ import { IProject } from '../../../common/Interfaces';
 export default function ShowProject(props:any) {
   const [project, setProject] = React.useState<IProject | any>({});
   const [tasks, setTasks] = React.useState({});
+  const [showAddTasks, setShowAddTasks] = React.useState(false);
 
   React.useEffect(() => {
     const loadProj = async() => {
       let url = new String(window.location);
       let projectId = url.split("/").pop();
-//      get('/api/v1/projects/1', params: {with_tasks: 'true'})
 
       try{
         const result = await Axios(
@@ -45,16 +45,46 @@ export default function ShowProject(props:any) {
       
       <div style={{ background: '#ECECEC', padding: '30px' }}>
         <Card title="Tasks" bordered={false}> 
+
         <Button
             type="dashed"
             onClick={ () => {
               console.log("adding task")
+              setShowAddTasks(true);
             }}
           >
              Add
           </Button>
         </Card>
       </div>
+      {showAddTasks ? addtask() : ''}
     </React.Fragment>
+  )
+}
+
+
+/*
+  Move to the parent
+  the add button
+  the state of whether to show it
+  the addtaks() component
+*/
+
+export function addtask() {
+  return(
+    <div style={{ background: '#ECECEC', padding: '30px' }}>
+    <Card title="AddTask" bordered={false}> 
+      <p>ADD</p>
+      <Button
+            type="dashed"
+            onClick={ () => {
+              console.log("done")
+              
+            }}
+          >
+             Done
+          </Button>
+    </Card>
+  </div>
   )
 }
