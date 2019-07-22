@@ -9,7 +9,6 @@ export default function ShowUserDetails(props:any) {
   return (
     <div style={{ background: "#ECECEC", padding: "30px" }}>
       <Card title="Profile" bordered={false}>
-        <p>show user details</p>
         <p>ETH address:{ethAcct}</p>
         <p>name:{user.name}</p>
       </Card>
