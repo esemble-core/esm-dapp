@@ -8,20 +8,32 @@ import { notify } from "../../../common/Actions";
 export default function AddUserToRPC() {
   const ethAccount = useReactWeb3();
   const [userName, setUserName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+
 
   
   return (
     <div style={{ background: "#ECECEC", padding: "30px" }}>
       <Card title="Add User" bordered={false}>
-        <p className="strong-p">Enter details for new user</p>
+        <p className="strong-p">Enter details for user</p>
         <Input
-          id="add-user-input"
+          id="add-user-name"
           className="form-control"
           placeholder="User name"
           value={userName}
           onChange={(e: React.FormEvent<HTMLInputElement>) => {
             const { name, value }: any = e.target;
             setUserName(value);
+          }}
+        />
+         <Input
+          id="add-user-email"
+          className="form-control"
+          placeholder="Email"
+          value={email}
+          onChange={(e: React.FormEvent<HTMLInputElement>) => {
+            const { name, value }: any = e.target;
+            setEmail(value);
           }}
         />
         <div className="row">
@@ -33,13 +45,14 @@ export default function AddUserToRPC() {
                 {
                   eth_addr: ethAccount,
                   name: userName,
+                  email: email,
                   uuid: "a-b-c-d"
                 }
               );
               notify("user added successfully");
             }}
           >
-            Create User
+            Save
           </Button>
         </div>
       </Card>

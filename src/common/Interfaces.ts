@@ -11,6 +11,7 @@ export interface IUser {
   id: number;
   name: string;
   description: string;
+  email: string;
 }
 
 export interface IAction {
