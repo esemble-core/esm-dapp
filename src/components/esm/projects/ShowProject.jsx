@@ -2,6 +2,7 @@ import React from 'react'
 import Axios from 'axios';
 import { notifyError } from '../../../common/Actions';
 import { Card, Button, List } from 'antd';
+import AddTask from './AddTask';
 
 
 export default function ShowProject(props) {
@@ -70,27 +71,8 @@ export default function ShowProject(props) {
           </Button>
         </Card>
       </div>
-      {showAddTasks ? addtask() : ''}
+      {showAddTasks ? <AddTask projectId={project.id} /> : ''}
     </React.Fragment>
   )
 }
 
-
-export function addtask() {
-  return(
-    <div style={{ background: '#ECECEC', padding: '30px' }}>
-    <Card title="Add New Task" bordered={false}> 
-      <p>ADD</p>
-      <Button
-            type="dashed"
-            onClick={ () => {
-              console.log("done")
-              
-            }}
-          >
-             Add
-          </Button>
-    </Card>
-  </div>
-  )
-}
