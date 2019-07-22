@@ -106,7 +106,7 @@ export default function AddProjectToRPC() {
             <Button 
               type="dashed"
               htmlType="submit">
-                Submit
+                Submit Proposal
             </Button>
           </Form.Item>
         </Form>

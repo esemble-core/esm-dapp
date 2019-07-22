@@ -14,6 +14,14 @@ export interface IUser {
   email: string;
 }
 
+export interface IProject {
+  id: number;
+  name: string;
+  description: string;
+  funding: number;
+  lifecycle: number;
+}
+
 export interface IAction {
   type: string; //Store.ActionType enum
   payload: any;

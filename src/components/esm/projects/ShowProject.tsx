@@ -1,11 +1,13 @@
 import React from 'react'
 import Axios from 'axios';
 import { notifyError } from '../../../common/Actions';
-import { Card } from 'antd';
+import { Card, Button } from 'antd';
+import { IProject } from '../../../common/Interfaces';
+
 
 
 export default function ShowProject(props:any) {
-  const [project, setProject] = React.useState({});
+  const [project, setProject] = React.useState<IProject | any>({});
   const [tasks, setTasks] = React.useState({});
 
   React.useEffect(() => {
@@ -31,11 +33,28 @@ export default function ShowProject(props:any) {
   
   
   return (
-    <div style={{ background: '#ECECEC', padding: '30px' }}>
-        <Card title="Project" bordered={false} >
-         <p>Project{JSON.stringify(project)}</p>
-          <p>Tasks{JSON.stringify(tasks)}</p>
-       </Card>
-    </div>
+    <React.Fragment>
+      <div style={{ background: '#ECECEC', padding: '30px' }}>
+        <Card title="Projects" bordered={false} > 
+            <p>Name: {project.name}</p>
+            <p>Description: {project.description}</p>
+            <p>Funding: {project.funding}</p>
+            <p>Lifecycle: {project.lifecycle}</p>
+        </Card>
+      </div>
+      
+      <div style={{ background: '#ECECEC', padding: '30px' }}>
+        <Card title="Tasks" bordered={false}> 
+        <Button
+            type="dashed"
+            onClick={ () => {
+              console.log("adding task")
+            }}
+          >
+             Add
+          </Button>
+        </Card>
+      </div>
+    </React.Fragment>
   )
 }
