@@ -2,7 +2,7 @@ import _ from "lodash";
 import { toast } from "react-toastify";
 import { ActionType } from "./Store";
 import Axios from "axios";
-import { Dispatch } from './Interfaces';
+import { Dispatch, ITask } from './Interfaces';
 
 export const notify = (msg: string, success?: boolean) => {
   !success ? toast(msg) : toast.success(msg, { autoClose: false });
@@ -17,6 +17,17 @@ export const notifyWarn = (msg: string) => {
     toast.warn(msg, { toastId: "nfId" });
   }
 };
+
+export const addTask = async (dispatch: Dispatch, task: ITask) => {
+  const result = await Axios.post(
+    "/api/v1/tasks",
+    {
+      project_id: task.project_id,
+      name: task.name
+    }
+  );
+  notify("task added successfully");
+}
 
 export const fetchProject = async (dispatch: Dispatch, projectId:number) => {
   try{

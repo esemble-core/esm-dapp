@@ -31,8 +31,10 @@ export interface IProject {
 }
 
 export interface ITask {
+  id?: number;
   name: string;
-  done: boolean;
+  done?: boolean;
+  project_id: number;
 }
 
 export interface IAction {

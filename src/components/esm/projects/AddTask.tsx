@@ -1,9 +1,12 @@
 import React from 'react'
 import { Card, Button, Input } from 'antd';
-import { notify } from '../../../common/Actions';
+import { notify, addTask } from '../../../common/Actions';
 import Axios from 'axios';
+import { ITask } from '../../../common/Interfaces';
+import { Store } from '../../../common/Store';
 
 export default function AddTask(props:any) {
+  const { dispatch } = React.useContext(Store);
   const [name, setName] = React.useState('');
   const projectId = props.projectId;
 
@@ -25,14 +28,11 @@ export default function AddTask(props:any) {
       <Button
             type="dashed"
             onClick={async () => {
-              const result = await Axios.post(
-                "/api/v1/tasks",
-                {
-                  project_id: projectId,
-                  name: name
-                }
-              );
-              notify("task added successfully");
+             let newTask: ITask = {
+               project_id: projectId,
+               name: name
+              }
+              addTask(dispatch, newTask);
             }}
           >
              Add
