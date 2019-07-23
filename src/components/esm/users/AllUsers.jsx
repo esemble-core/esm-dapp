@@ -1,19 +1,17 @@
 import React from 'react'
 import { Card, List } from 'antd';
-import axios from 'axios';
+import { fetchUsers } from '../../../common/Actions';
+import { Store } from '../../../common/Store';
 
 
-export default function AllUsers(props) {
- 
-  const [usersArray, setUsersArray] = React.useState([]);
+export default function AllUsers() {
+  const { state, dispatch } = React.useContext(Store);
+  const usersArray = state.users;
+
 
   React.useEffect(() => {
     const loadUsers = async() => {
-      console.log("loading users from api");
-      const result = await axios(
-        '/api/v1/users',
-      );
-      setUsersArray(result.data.data);
+      fetchUsers(dispatch);
     }
     loadUsers();
   }, []);

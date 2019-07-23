@@ -7,6 +7,11 @@
 export type Dispatch = React.Dispatch<IAction>;
 
 
+export interface IAppState {
+  projects: Array<IProject>;
+  users: Array<IUser>;
+}
+
 export interface IUser {
   id: number;
   name: string;
@@ -27,7 +32,7 @@ export interface ITask {
 }
 
 export interface IAction {
-  type: string; //Store.ActionType enum
+  type: string; //enum from Store.ActionType
   payload: any;
 }
 
@@ -52,6 +57,3 @@ export interface ILoomObject {
   connectionInfo: ILoomConnectionInfo|any;
 }
 
-
-export interface IAppState {
-}

@@ -6,12 +6,14 @@ import {
 
 
 export enum ActionType {
-  SET_ACCOUNT = "esm/SET_ACCOUNT"
+  SET_PROJECTS = "esm/PROJECTS",
+  SET_USERS = "esm/USERS",
 }
 
 
 const initialState: IAppState = {
-    ethAddr: ""
+    projects: [],
+    users: []
 };
 
 
@@ -21,9 +23,13 @@ export const Store = React.createContext<IAppState | any>(initialState);
 
 function reducer(state: IAppState, action: IAction | any): IAppState {
   switch (action.type) {
-    case ActionType.SET_ACCOUNT:
+    case ActionType.SET_PROJECTS:
       return {
-        ...state, ethAddr: action.payload
+        ...state, projects: action.payload
+      }
+    case ActionType.SET_USERS:
+      return {
+        ...state, users: action.payload
       }
     default:
       return state;

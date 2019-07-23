@@ -1,23 +1,17 @@
 import React from 'react'
-import Axios from 'axios';
 import { List, Card } from 'antd';
-import { notifyError } from '../../../common/Actions';
+import { fetchProjects } from '../../../common/Actions';
+import { Store } from '../../../common/Store';
+
 
 export default function AllProjects() {
-  const [projArray, setProjArray] = React.useState([]);
+  const { state, dispatch } = React.useContext(Store);
+  const projArray = state.projects;
 
   React.useEffect(() => {
     const loadProjects = async() => {
       console.log("loading projects from api");
-      try{
-        const result = await Axios(
-          '/api/v1/projects',
-        );
-        setProjArray(result.data.data);
-        }catch (error){
-          console.error("Could not connect to server");
-          notifyError("Could not connect to server, please try again later");
-        }
+      fetchProjects(dispatch);
     }
     loadProjects();
   }, []);
