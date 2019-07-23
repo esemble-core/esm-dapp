@@ -8,8 +8,11 @@ export type Dispatch = React.Dispatch<IAction>;
 
 
 export interface IAppState {
-  projects: Array<IProject>;
   users: Array<IUser>;
+  currentUser: IUser |any;
+  projects: Array<IProject>;
+  currentProject: IProject |any;
+  tasks: Array<ITask>;
 }
 
 export interface IUser {
@@ -29,6 +32,7 @@ export interface IProject {
 
 export interface ITask {
   name: string;
+  done: boolean;
 }
 
 export interface IAction {

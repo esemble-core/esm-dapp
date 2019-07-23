@@ -18,6 +18,27 @@ export const notifyWarn = (msg: string) => {
   }
 };
 
+export const fetchProject = async (dispatch: Dispatch, projectId:number) => {
+  try{
+    const result = await Axios(
+      `/api/v1/projects/${projectId}`, {params: {with_tasks: true}},
+    );
+      
+    dispatch({
+      type: ActionType.SET_CURRENT_PROJECT,
+      payload: result.data.data
+    });
+    dispatch({
+      type: ActionType.SET_TASKS,
+      payload: result.data.include
+    });
+
+  }catch (error){
+    console.error("Could not connect to server");
+    notifyError("Could not connect to server, please try again later");
+  }
+}
+
 
 export const fetchProjects = async(dispatch: Dispatch, force: boolean) => {
   try{
@@ -34,6 +55,10 @@ export const fetchProjects = async(dispatch: Dispatch, force: boolean) => {
       console.error("Could not connect to server");
       notifyError("Could not connect to server, please try again later");
   }
+}
+
+export const fetchTasks = async( dispatch: Dispatch, projectId:number, force:boolean) => {
+
 }
 
 export const fetchUsers = async (dispatch: Dispatch, force: boolean) => {
