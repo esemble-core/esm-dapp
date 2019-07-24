@@ -30,6 +30,10 @@ export const fetchUserForEthAddr = async(dispatch: Dispatch, ethAccount: string)
       payload: result.data.data
     })
   }else {
+    dispatch({
+      type: ActionType.SET_CURRENT_USER,
+      payload: {}
+    })
     console.log("json return for search did not return a success status");
   }
 }

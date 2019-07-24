@@ -4,15 +4,17 @@ import { Store } from '../../../common/Store';
 import { IUser } from '../../../common/Interfaces';
 import ShowUserDetails from './ShowUserDetails';
 import AddUserToRPC from './AddUserToRPC';
-import { useUser } from './useUser';
+import useLoadUser from './useLoadUser';
 
 
 
 export default function ShowAndAddUser() {
   const ethAcct = useReactWeb3();
   const [noUser, setNoUser] = React.useState(false);
-  const {state, dispatch} = React.useContext(Store);
-  const user: IUser = useUser();
+  const {state } = React.useContext(Store);
+
+  useLoadUser();
+  const user: IUser = state.currentUser;
 
   React.useEffect(() => {
     if (!user.id){
