@@ -1,31 +1,29 @@
-import React from 'react';
+import { useContext, useEffect, useState } from 'react';
 import useReactWeb3 from '../../chainstate/useReactWeb3';
-import Axios from 'axios';
+import { Store } from '../../../common/Store';
+import { async } from 'q';
+import { fetchUserForEthAddr } from '../../../common/Actions';
 import { IUser } from '../../../common/Interfaces';
 
 
 export function useUser(){
-  const [user, setUser] = React.useState<IUser | any>({});
+  const { state, dispatch } = useContext(Store);
   const ethAccount = useReactWeb3();
+  const [user, setUser] = useState<IUser| any>({})
 
-  React.useEffect(() => {
-    const getUser = async () => {
-      console.log("getting user for acct:", ethAccount);
-      const result = await Axios(
-        `/api/v1/usersearch?eth_addr=${ethAccount}`
-      );
 
-      if (result.data.status==='SUCCESS') {
-        setUser(result.data.data);
-      }else{
-        setUser({});
-      }
-    };
-
-    if (ethAccount) {
-      getUser();
+  useEffect(() => {
+    const loadUserForAcct = async() => {
+      await fetchUserForEthAddr(dispatch, ethAccount);
     }
+    loadUserForAcct();
   }, [ethAccount]);
+
+
+  useEffect(() => {
+
+      setUser(state.currentUser);
+  }, [state.currentUser]);
 
   return user;
 }

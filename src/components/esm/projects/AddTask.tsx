@@ -32,7 +32,7 @@ export default function AddTask(props:any) {
                project_id: projectId,
                name: name
               }
-              addTask(dispatch, newTask);
+              await addTask(dispatch, newTask);
             }}
           >
              Add

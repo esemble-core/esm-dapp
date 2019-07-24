@@ -11,7 +11,7 @@ export default function AllUsers() {
 
   React.useEffect(() => {
     const loadUsers = async() => {
-      fetchUsers(dispatch);
+      await fetchUsers(dispatch);
     }
     loadUsers();
   }, []);

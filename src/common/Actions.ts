@@ -18,6 +18,23 @@ export const notifyWarn = (msg: string) => {
   }
 };
 
+
+export const fetchUserForEthAddr = async(dispatch: Dispatch, ethAccount: string) => {
+  const result = await Axios(
+    `/api/v1/usersearch?eth_addr=${ethAccount}`
+  );
+
+  if (result.data.status==='SUCCESS') {
+    dispatch({
+      type: ActionType.SET_CURRENT_USER,
+      payload: result.data.data
+    })
+  }else {
+    console.log("json return for search did not return a success status");
+  }
+}
+
+
 export const addTask = async (dispatch: Dispatch, task: ITask) => {
   const result = await Axios.post(
     "/api/v1/tasks",

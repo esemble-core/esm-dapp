@@ -11,7 +11,7 @@ export default function AllProjects() {
   React.useEffect(() => {
     const loadProjects = async() => {
       console.log("loading projects from api");
-      fetchProjects(dispatch);
+      await fetchProjects(dispatch);
     }
     loadProjects();
   }, []);

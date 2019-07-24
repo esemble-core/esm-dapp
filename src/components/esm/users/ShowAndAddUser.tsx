@@ -1,17 +1,19 @@
 import React from 'react'
 import useReactWeb3 from '../../chainstate/useReactWeb3';
-import { useUser } from './useUser';
-import AddUserToRPC from './AddUserToRPC';
-import { IUser } from './../../../common/Interfaces';
+import { Store } from '../../../common/Store';
+import { IUser } from '../../../common/Interfaces';
 import ShowUserDetails from './ShowUserDetails';
-import { Card } from 'antd';
+import AddUserToRPC from './AddUserToRPC';
+import { useUser } from './useUser';
+
 
 
 export default function ShowAndAddUser() {
-  const [noUser, setNoUser] = React.useState(false);
   const ethAcct = useReactWeb3();
+  const [noUser, setNoUser] = React.useState(false);
+  const {state, dispatch} = React.useContext(Store);
   const user: IUser = useUser();
-  
+
   React.useEffect(() => {
     if (!user.id){
       setNoUser(true);

@@ -18,7 +18,7 @@ export default function ShowProject(props) {
       let url = window.location.toString();
       let projectId = url.split("/").pop();
 
-      fetchProject(dispatch, projectId);
+      await fetchProject(dispatch, projectId);
     }
     loadProj();
   }, [])

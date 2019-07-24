@@ -20,6 +20,7 @@ export interface IUser {
   name: string;
   description: string;
   email: string;
+  uuid?: string;
 }
 
 export interface IProject {
