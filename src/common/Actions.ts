@@ -2,7 +2,7 @@ import _ from "lodash";
 import { toast } from "react-toastify";
 import { ActionType } from "./Store";
 import Axios from "axios";
-import { Dispatch, ITask } from './Interfaces';
+import { Dispatch, ITask, IUser } from './Interfaces';
 
 export const notify = (msg: string, success?: boolean) => {
   !success ? toast(msg) : toast.success(msg, { autoClose: false });
@@ -17,6 +17,24 @@ export const notifyWarn = (msg: string) => {
     toast.warn(msg, { toastId: "nfId" });
   }
 };
+
+
+export const addUser = async (dispatch: Dispatch, user: IUser) => {
+  const result = await Axios.post(
+    "/api/v1/users",
+    {
+      eth_addr: user.eth_addr,
+      name: user.name,
+      email: user.email,
+      uuid: "a-b-c-d"
+    }
+  );
+  dispatch({
+    type: ActionType.SET_CURRENT_USER,
+    payload: user
+  })
+  notify("user added successfully");
+}
 
 
 export const fetchUserForEthAddr = async(dispatch: Dispatch, ethAccount: string) => {
@@ -47,6 +65,10 @@ export const addTask = async (dispatch: Dispatch, task: ITask) => {
       name: task.name
     }
   );
+  dispatch({
+    type: ActionType.ADD_TASK,
+    payload: task
+  });
   notify("task added successfully");
 }
 

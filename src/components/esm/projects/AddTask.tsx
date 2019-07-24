@@ -18,7 +18,7 @@ export default function AddTask(props:any) {
       <Input
           id="add-task-name"
           className="form-control"
-          placeholder="name"
+          placeholder="task name"
           value={name}
           onChange={(e: React.FormEvent<HTMLInputElement>) => {
             const { name, value }: any = e.target;
@@ -33,6 +33,7 @@ export default function AddTask(props:any) {
                name: name
               }
               await addTask(dispatch, newTask);
+              setName('');
             }}
           >
              Add

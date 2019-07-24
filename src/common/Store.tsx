@@ -11,7 +11,8 @@ export enum ActionType {
   SET_CURRENT_USER = "esm/CURRENT_USER",
   SET_PROJECTS = "esm/PROJECTS",
   SET_CURRENT_PROJECT = "esm/CURRENT_PROJECT",
-  SET_TASKS = "esm/TASKS"
+  SET_TASKS = "esm/TASKS",
+  ADD_TASK = "esm/ADD_TASK"
 }
 
 
@@ -43,6 +44,10 @@ function reducer(state: IAppState, action: IAction | any): IAppState {
     case ActionType.SET_CURRENT_PROJECT:
       return {
         ...state, currentProject: action.payload
+      }
+    case ActionType.ADD_TASK:
+      return {
+        ...state, tasks: [...state.tasks, action.payload]
       }
     case ActionType.SET_TASKS:
       return {

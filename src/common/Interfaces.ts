@@ -16,11 +16,11 @@ export interface IAppState {
 }
 
 export interface IUser {
-  id: number;
+  id?: number;
   name: string;
-  description: string;
   email: string;
   uuid?: string;
+  eth_addr: string;
 }
 
 export interface IProject {

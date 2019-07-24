@@ -1,17 +1,17 @@
 import React from "react";
 import useReactWeb3 from "../../chainstate/useReactWeb3";
-import axios from "axios";
 import { Card, Input, Button } from "antd";
-import { notify } from "../../../common/Actions";
+import { IUser } from './../../../common/Interfaces';
+import { addUser } from "../../../common/Actions";
+import { Store } from "../../../common/Store";
 
 
 export default function AddUserToRPC() {
   const ethAccount = useReactWeb3();
   const [userName, setUserName] = React.useState("");
   const [email, setEmail] = React.useState("");
+  const { dispatch } = React.useContext(Store);
 
-
-  
   return (
     <div style={{ background: "#ECECEC", padding: "30px" }}>
       <Card title="Add User" bordered={false}>
@@ -40,16 +40,12 @@ export default function AddUserToRPC() {
           <Button
             type="dashed"
             onClick={async () => {
-              const result = await axios.post(
-                "/api/v1/users",
-                {
-                  eth_addr: ethAccount,
-                  name: userName,
-                  email: email,
-                  uuid: "a-b-c-d"
-                }
-              );
-              notify("user added successfully");
+              let user: IUser = {
+                name: userName,
+                email: email,
+                eth_addr: ethAccount
+              }
+             await addUser(dispatch, user);
             }}
           >
             Save

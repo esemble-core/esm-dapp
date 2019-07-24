@@ -16,16 +16,20 @@ export default function ShowAndAddUser() {
   useLoadUser();
   const user: IUser = state.currentUser;
 
+  console.log("user currently logged in is:", user);
+
+
   React.useEffect(() => {
-    if (!user.id){
+    console.log("ShowAndAddUser().useEffect([user, user.id]...user:", user);
+    if (!user.name){
       setNoUser(true);
     }else {
       setNoUser(false);
     }
-  }, [user.id]);
+  }, [user, user.name]);
+
 
   
-  console.log("user currently logged in is:", user);
   return (
     <React.Fragment>
       <ShowUserDetails user={user} ethAcct={ethAcct} />
