@@ -1,8 +1,9 @@
 import React from 'react'
-import { fetchProject } from '../../../common/Actions';
+import { fetchProject, notifyWarn, workOnTask } from '../../../common/Actions';
 import { Card, Button, List } from 'antd';
 import AddTask from './AddTask';
 import { Store } from '../../../common/Store';
+import useLoadUser from '../users/useLoadUser';
 
 
 export default function ShowProject(props) {
@@ -10,9 +11,11 @@ export default function ShowProject(props) {
   const project = state.currentProject;
   const tasks = state.tasks;
   const [showAddTasks, setShowAddTasks] = React.useState(false);
+  
+  useLoadUser();
+  const user = state.currentUser;
 
-  console.log("project", project);
-
+  
   React.useEffect(() => {
     const loadProj = async() => {
       let url = window.location.toString();
@@ -44,9 +47,25 @@ export default function ShowProject(props) {
           dataSource={tasks}
           renderItem={item => (
             <List.Item 
-              key={item.name}
+              key={item.id}
             >
-              <p className="strong-p">{item.name}</p>    
+              <p className="strong-p">{item.name}</p> 
+             
+              <Button
+                className="ml-auto"
+                type="dashed"
+                onClick={async () => {
+                  //if they just added task, it won't have id (until refresh)
+                  if (item.id===undefined){
+                    notifyWarn("This task can not currently be worked on, it may be too new (try refreshing screen).");
+                  }
+                  
+                  await workOnTask(dispatch, user, item);
+                }}
+                >
+                Work on
+              </Button>
+             
            
             </List.Item>
           )}

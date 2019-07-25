@@ -20,6 +20,23 @@ export const notifyWarn = (msg: string) => {
 };
 
 
+export const workOnTask = async (dispatch: Dispatch, user: IUser, task: ITask) => {
+  //task has id
+  //user id
+  //it task.id !===undefined && task.id > 0
+  //if user.id !== undefined && user.id > 0
+  console.log("work on task, for user.id: ", user.id, " taskid: ", task.id);
+  const result = await Axios.post(
+    "/api/v1/user_working_on_task",
+    {
+      user_id: user.id,
+      task_id: task.id
+    }
+  );
+  notify("User added to work on this task");
+}
+
+
 export const addUser = async (dispatch: Dispatch, user: IUser) => {
   const result = await Axios.post(
     "/api/v1/users",
