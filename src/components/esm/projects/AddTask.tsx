@@ -36,8 +36,8 @@ export default function AddTask(props:any) {
               setName('');
             }}
           >
-             Add
-          </Button>
+        Add
+      </Button>
     </Card>
   </div>
   )

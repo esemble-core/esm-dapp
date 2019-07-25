@@ -1,8 +1,9 @@
 import _ from "lodash";
 import { toast } from "react-toastify";
-import { ActionType } from "./Store";
+import { ActionType, Store } from "./Store";
 import Axios from "axios";
 import { Dispatch, ITask, IUser } from './Interfaces';
+import React from 'react';
 
 export const notify = (msg: string, success?: boolean) => {
   !success ? toast(msg) : toast.success(msg, { autoClose: false });
