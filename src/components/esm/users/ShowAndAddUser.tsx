@@ -14,7 +14,7 @@ export default function ShowAndAddUser() {
   const {state } = React.useContext(Store);
 
   useLoadUser();
-  const user: IUser = state.currentUser;
+  const user:IUser = state.currentUser;
 
   console.log("user currently logged in is:", user);
 
@@ -26,7 +26,7 @@ export default function ShowAndAddUser() {
     }else {
       setNoUser(false);
     }
-  }, [user, user.name]);
+  }, [user.name]);
 
 
   
