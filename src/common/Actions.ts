@@ -21,23 +21,45 @@ export const notifyWarn = (msg: string) => {
 
 
 export const workOnTask = async (dispatch: Dispatch, user: IUser, task: ITask) => {
-  //task has id
-  //user id
-  //it task.id !===undefined && task.id > 0
-  //if user.id !== undefined && user.id > 0
+ 
+  if (user===undefined || user.id === undefined){
+    notifyError("Please register on the \"my profile\" page and log into meta mask to be able to work on this task");
+    return;
+  }
+   
   console.log("work on task, for user.id: ", user.id, " taskid: ", task.id);
   const result = await Axios.post(
-    "/api/v1/user_working_on_task",
-    {
-      user_id: user.id,
-      task_id: task.id
-    }
-  );
+      "/api/v1/user_working_on_task",
+      {
+        user_id: user.id,
+        task_id: task.id
+      }
+    );
   notify("User added to work on this task");
 }
 
 
 export const addUser = async (dispatch: Dispatch, user: IUser) => {
+  if (user === undefined){
+    notifyWarn("user was not available to process, please log into meta mask before registering");
+    return;
+  }
+
+  if (user.eth_addr===undefined || user.eth_addr===''){
+    notifyWarn("The Meta Mask user was not available. Please log in (or register) with Meta Mask.");
+    return;
+  }
+
+  if (user.name===undefined || user.name===''){
+    notifyWarn("You must provide a desired user name");
+    return;
+  }
+
+  if (user.email===undefined || user.email===''){
+    notifyWarn("You must provide your email address");
+    return;
+  }
+
   const result = await Axios.post(
     "/api/v1/users",
     {
