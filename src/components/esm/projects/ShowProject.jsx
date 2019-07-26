@@ -65,6 +65,15 @@ export default function ShowProject(props) {
                 >
                 Work on
               </Button>
+              <Button
+                className="ml-auto"
+                type="dashed"
+                onClick={()=> {
+                    window.location = `/tasks/${item.id}`
+                  }}
+                >
+               View
+              </Button>
              
            
             </List.Item>
