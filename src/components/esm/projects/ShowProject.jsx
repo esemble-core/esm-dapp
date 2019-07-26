@@ -4,6 +4,7 @@ import { Card, Button, List } from 'antd';
 import AddTask from './AddTask';
 import { Store } from '../../../common/Store';
 import useLoadUser from '../users/useLoadUser';
+import { idFromUrl } from '../../../utils/WebUtil';
 
 
 export default function ShowProject(props) {
@@ -18,9 +19,7 @@ export default function ShowProject(props) {
   
   React.useEffect(() => {
     const loadProj = async() => {
-      let url = window.location.toString();
-      let projectId = url.split("/").pop();
-
+      let projectId = idFromUrl();
       await fetchProject(dispatch, projectId);
     }
     loadProj();

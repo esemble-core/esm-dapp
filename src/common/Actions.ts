@@ -20,14 +20,18 @@ export const notifyWarn = (msg: string) => {
 };
 
 
+export const fetchTask = async(dispatch: Dispatch, taskId: string| undefined) => {
+  console.log("fetchTask()");
+}
+
+
+
 export const workOnTask = async (dispatch: Dispatch, user: IUser, task: ITask) => {
- 
   if (user===undefined || user.id === undefined){
     notifyError("Please register on the \"my profile\" page and log into meta mask to be able to work on this task");
     return;
   }
-   
-  console.log("work on task, for user.id: ", user.id, " taskid: ", task.id);
+  //console.log("work on task, for user.id: ", user.id, " taskid: ", task.id);
   const result = await Axios.post(
       "/api/v1/user_working_on_task",
       {
