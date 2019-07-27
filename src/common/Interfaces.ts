@@ -13,6 +13,7 @@ export interface IAppState {
   projects: Array<IProject>;
   currentProject: IProject |any;
   tasks: Array<ITask>;
+  currentTask: ITask |any;
 }
 
 export interface IUser {
@@ -36,6 +37,7 @@ export interface ITask {
   name: string;
   done?: boolean;
   project_id: number;
+  working_on?: Array<IUser>;
 }
 
 export interface IAction {

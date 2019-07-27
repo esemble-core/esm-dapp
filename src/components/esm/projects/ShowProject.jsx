@@ -68,7 +68,7 @@ export default function ShowProject(props) {
                 className="ml-auto"
                 type="dashed"
                 onClick={()=> {
-                    window.location = `/tasks/${item.id}`
+                    window.location = `/task/${item.id}`
                   }}
                 >
                View

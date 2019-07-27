@@ -22,6 +22,13 @@ export const notifyWarn = (msg: string) => {
 
 export const fetchTask = async(dispatch: Dispatch, taskId: string| undefined) => {
   console.log("fetchTask()");
+  const result = await Axios.get(
+    `/api/v1/tasks/${taskId}`
+  );
+  dispatch({
+    type: ActionType.SET_CURRENT_TASK,
+    payload: [result.data.data, result.data.include]
+  })
 }
 
 

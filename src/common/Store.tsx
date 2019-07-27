@@ -2,6 +2,7 @@ import React from "react";
 import {
   IAction,
   IAppState,
+  ITask,
 } from "./Interfaces";
 import { ninvoke } from "q";
 
@@ -12,7 +13,8 @@ export enum ActionType {
   SET_PROJECTS = "esm/PROJECTS",
   SET_CURRENT_PROJECT = "esm/CURRENT_PROJECT",
   SET_TASKS = "esm/TASKS",
-  ADD_TASK = "esm/ADD_TASK"
+  ADD_TASK = "esm/ADD_TASK",
+  SET_CURRENT_TASK = "esm/CURRENT_TASK"
 }
 
 
@@ -22,6 +24,7 @@ const initialState: IAppState = {
     projects: [],
     currentProject: {},
     tasks: [],
+    currentTask: {}
 };
 
 
@@ -53,6 +56,12 @@ function reducer(state: IAppState, action: IAction | any): IAppState {
       return {
         ...state, tasks: action.payload
       }
+    case ActionType.SET_CURRENT_TASK:
+        let hydratedTask: ITask = action.payload[0];
+        hydratedTask.working_on = action.payload[1];
+        return {
+          ...state, currentTask: hydratedTask
+        }
     default:
       return state;
   }
