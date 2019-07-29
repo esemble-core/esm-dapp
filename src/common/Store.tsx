@@ -59,6 +59,7 @@ function reducer(state: IAppState, action: IAction | any): IAppState {
     case ActionType.SET_CURRENT_TASK:
         let hydratedTask: ITask = action.payload[0];
         hydratedTask.working_on = action.payload[1];
+        hydratedTask.task_fundings = action.payload[2];
         return {
           ...state, currentTask: hydratedTask
         }

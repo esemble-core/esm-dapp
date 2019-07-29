@@ -38,6 +38,16 @@ export interface ITask {
   done?: boolean;
   project_id: number;
   working_on?: Array<IUser>;
+  task_fundings?: Array<ITaskFunding>;
+}
+
+export interface ITaskFunding {
+  id?: number;
+  token_address: string;
+  token_symbol: string;
+  token_name: string;
+  amount: number; 
+  task_id: number;
 }
 
 export interface IAction {

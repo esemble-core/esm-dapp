@@ -1,7 +1,11 @@
 import React from 'react';
 import Logo from "./../img/esemble6.png";
+import { Store } from '../common/Store';
 
 export default function Header() {
+  const { state } = React.useContext(Store);
+  const user = state.currentUser;
+
   return (
     <React.Fragment>
        <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
@@ -28,13 +32,16 @@ export default function Header() {
                   <a className="nav-link" href="/how_it_works">how it works</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/my_profile">my profile</a>
-                </li>
-                <li className="nav-item">
                   <a className="nav-link" href="/admin">admin</a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="/test">test</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/my_profile">
+                    <i className="far fa-user-circle fa-2x" data-fa-transform="shrink-3 up-5"></i>
+                    {user.name ? user.name :  ''}
+                  </a>
                 </li>
               </ul>
             </div>

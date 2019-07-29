@@ -27,7 +27,7 @@ export const fetchTask = async(dispatch: Dispatch, taskId: string| undefined) =>
   );
   dispatch({
     type: ActionType.SET_CURRENT_TASK,
-    payload: [result.data.data, result.data.include]
+    payload: [result.data.data, result.data.include, result.data.task_fundings]
   })
 }
 
@@ -103,7 +103,7 @@ export const fetchUserForEthAddr = async(dispatch: Dispatch, ethAccount: string)
       type: ActionType.SET_CURRENT_USER,
       payload: {}
     })
-    console.log("json return for search did not return a success status");
+    //console.log("json return for search did not return a success status for fetch user");
   }
 }
 
