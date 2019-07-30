@@ -35,35 +35,6 @@ export const proposeProject = async(project: IProject) => {
 }
 
 
-export const generateTestProject = async(prefix: string) => {
-  console.log("Action.generateTestProject(), for prefix:", prefix);
-  let proj: IProject = {
-    name: `${prefix}-project name`,
-    description: `${prefix}-project description`,
-    funding: 3,
-    lifecycle: 1
-  }
-  let projResult = await proposeProject(proj);
-  let projectId = projResult.data.data.id;
-  console.log("project result, data payload, id", projectId);
-  
-  const result = await Axios.post(
-    "/api/v1/tasks",
-    {
-      project_id: projectId,
-      name: `${prefix} task one`
-    }
-  );
-  notify("task one submitted successfully");
-  
-  //users working on 
-
-  //task funding
-
-  //token events
-}
-
-
 export const fetchTask = async(dispatch: Dispatch, taskId: string| undefined) => {
   console.log("fetchTask()");
   const result = await Axios.get(
@@ -71,7 +42,7 @@ export const fetchTask = async(dispatch: Dispatch, taskId: string| undefined) =>
   );
   dispatch({
     type: ActionType.SET_CURRENT_TASK,
-    payload: [result.data.data, result.data.include, result.data.task_fundings, result.data.events]
+    payload: [result.data.task, result.data.users_working_on, result.data.task_fundings, result.data.events]
   })
 }
 
@@ -140,7 +111,7 @@ export const fetchUserForEthAddr = async(dispatch: Dispatch, ethAccount: string)
   if (result.data.status==='SUCCESS') {
     dispatch({
       type: ActionType.SET_CURRENT_USER,
-      payload: result.data.data
+      payload: result.data.user
     })
   }else {
     dispatch({
@@ -175,11 +146,11 @@ export const fetchProject = async (dispatch: Dispatch, projectId:number) => {
       
     dispatch({
       type: ActionType.SET_CURRENT_PROJECT,
-      payload: result.data.data
+      payload: result.data.project
     });
     dispatch({
       type: ActionType.SET_TASKS,
-      payload: result.data.include
+      payload: result.data.tasks
     });
 
   }catch (error){
@@ -197,7 +168,7 @@ export const fetchProjects = async(dispatch: Dispatch, force: boolean) => {
 
     dispatch({
       type: ActionType.SET_PROJECTS,
-      payload: result.data.data
+      payload: result.data.projects
     });
 
   }catch (error){
@@ -206,9 +177,6 @@ export const fetchProjects = async(dispatch: Dispatch, force: boolean) => {
   }
 }
 
-export const fetchTasks = async( dispatch: Dispatch, projectId:number, force:boolean) => {
-
-}
 
 export const fetchUsers = async (dispatch: Dispatch, force: boolean) => {
   try{
@@ -218,11 +186,55 @@ export const fetchUsers = async (dispatch: Dispatch, force: boolean) => {
 
     dispatch({
       type: ActionType.SET_USERS,
-      payload: result.data.data
+      payload: result.data.users
     });
 
   }catch (error){
       console.error("Could not connect to server");
       notifyError("Could not connect to server, please try again later");
   }
+}
+
+
+export const generateTestProject = async(prefix: string) => {
+  console.log("Action.generateTestProject(), for prefix:", prefix);
+  let proj: IProject = {
+    name: `${prefix}-project name`,
+    description: `${prefix}-project description`,
+    funding: 3,
+    lifecycle: 1
+  }
+  let projResult = await proposeProject(proj);
+  let projectId = projResult.data.project.id;
+  console.log("project result, data payload, id", projectId);
+  
+  const result = await Axios.post(
+    "/api/v1/tasks",
+    {
+      project_id: projectId,
+      name: `${prefix} task one`
+    }
+  );
+  notify("task one submitted successfully");
+  console.log("task creation result,", result.data.task.id);
+  let task_id = result.data.task.id;
+  
+  const resultUser = await Axios.get('/api/v1/users/1');
+  
+  if (resultUser.data.user.id > 0){
+    const resultWorking = await Axios.post(
+      "/api/v1/user_working_on_task",
+      {
+        user_id: 1,
+        task_id: task_id
+      }
+    );
+    notify("user working on, added");
+  }else {
+    notifyWarn("could not add user_working_on, since user id=1 was not found");
+  }
+
+  //task funding
+
+  //token events
 }
