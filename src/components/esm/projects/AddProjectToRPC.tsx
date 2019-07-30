@@ -1,8 +1,9 @@
 import React from "react";
 import { Input, Card, Form, Slider, Radio, Button } from "antd";
 import Axios from "axios";
-import { notify } from "../../../common/Actions";
+import { notify, proposeProject } from "../../../common/Actions";
 import { RadioChangeEvent } from "antd/lib/radio";
+import { IProject } from "../../../common/Interfaces";
 
 export default function AddProjectToRPC() {
   const [projName, setProjName] = React.useState("");
@@ -38,17 +39,14 @@ export default function AddProjectToRPC() {
       <Card title="Propose a Project" bordered={false}>
         <Form
           {...formItemLayout}
-          onSubmit={async() => {
-            const result = await Axios.post(
-              "/api/v1/projects",
-              {
-                lifecycle: 1,
-                name: projName,
-                description: projDescription,
-                funding: funding
-              }
-            );
-            notify("project proposal submitted successfully");
+          onSubmit={ async() => {
+            let project: IProject = {
+              name: projName,
+              description: projDescription,
+              funding: funding,
+              lifecycle: 1
+            };
+            await proposeProject(project);
           }}
         >
           <p className="strong-p">Enter details for new project project</p>

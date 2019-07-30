@@ -25,7 +25,7 @@ export interface IUser {
 }
 
 export interface IProject {
-  id: number;
+  id?: number;
   name: string;
   description: string;
   funding: number;
@@ -39,6 +39,19 @@ export interface ITask {
   project_id: number;
   working_on?: Array<IUser>;
   task_fundings?: Array<ITaskFunding>;
+  events?: Array<IVerifiableTaskEvent>;
+}
+
+export interface IVerifiableTaskEvent {
+  event_type: number;
+  attachment_link_text: string;
+  verifications ?: Array<ITaskEventVerification>;
+}
+
+export interface ITaskEventVerification {
+  comment: string;
+  user_id: number;
+  verifiable_task_event_id: number;
 }
 
 export interface ITaskFunding {

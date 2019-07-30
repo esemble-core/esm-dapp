@@ -2,8 +2,9 @@ import _ from "lodash";
 import { toast } from "react-toastify";
 import { ActionType, Store } from "./Store";
 import Axios from "axios";
-import { Dispatch, ITask, IUser } from './Interfaces';
+import { Dispatch, ITask, IUser, IProject } from './Interfaces';
 import React from 'react';
+import { async } from "q";
 
 export const notify = (msg: string, success?: boolean) => {
   !success ? toast(msg) : toast.success(msg, { autoClose: false });
@@ -20,6 +21,49 @@ export const notifyWarn = (msg: string) => {
 };
 
 
+export const proposeProject = async(project: IProject) => {
+  const result = await Axios.post(
+    "/api/v1/projects",
+    {
+      lifecycle: 1,
+      name: project.name,
+      description: project.description,
+      funding: project.funding
+    });
+    notify("project proposal submitted successfully");
+  return result;
+}
+
+
+export const generateTestProject = async(prefix: string) => {
+  console.log("Action.generateTestProject(), for prefix:", prefix);
+  let proj: IProject = {
+    name: `${prefix}-project name`,
+    description: `${prefix}-project description`,
+    funding: 3,
+    lifecycle: 1
+  }
+  let projResult = await proposeProject(proj);
+  let projectId = projResult.data.data.id;
+  console.log("project result, data payload, id", projectId);
+  
+  const result = await Axios.post(
+    "/api/v1/tasks",
+    {
+      project_id: projectId,
+      name: `${prefix} task one`
+    }
+  );
+  notify("task one submitted successfully");
+  
+  //users working on 
+
+  //task funding
+
+  //token events
+}
+
+
 export const fetchTask = async(dispatch: Dispatch, taskId: string| undefined) => {
   console.log("fetchTask()");
   const result = await Axios.get(
@@ -27,7 +71,7 @@ export const fetchTask = async(dispatch: Dispatch, taskId: string| undefined) =>
   );
   dispatch({
     type: ActionType.SET_CURRENT_TASK,
-    payload: [result.data.data, result.data.include, result.data.task_fundings]
+    payload: [result.data.data, result.data.include, result.data.task_fundings, result.data.events]
   })
 }
 

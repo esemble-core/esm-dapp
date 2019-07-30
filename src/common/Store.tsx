@@ -60,6 +60,7 @@ function reducer(state: IAppState, action: IAction | any): IAppState {
         let hydratedTask: ITask = action.payload[0];
         hydratedTask.working_on = action.payload[1];
         hydratedTask.task_fundings = action.payload[2];
+        hydratedTask.events = action.payload[3];
         return {
           ...state, currentTask: hydratedTask
         }
