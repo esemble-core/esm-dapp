@@ -217,7 +217,7 @@ export const generateTestProject = async(prefix: string) => {
   );
   notify("task one submitted successfully");
   console.log("task creation result,", result.data.task.id);
-  let task_id = result.data.task.id;
+  let taskId = result.data.task.id;
   
   const resultUser = await Axios.get('/api/v1/users/1');
   
@@ -226,7 +226,7 @@ export const generateTestProject = async(prefix: string) => {
       "/api/v1/user_working_on_task",
       {
         user_id: 1,
-        task_id: task_id
+        task_id: taskId
       }
     );
     notify("user working on, added");
@@ -234,7 +234,38 @@ export const generateTestProject = async(prefix: string) => {
     notifyWarn("could not add user_working_on, since user id=1 was not found");
   }
 
-  //task funding
+  const resultFundings = await Axios.post(
+    "/api/v1/task_fundings/",
+    {
+      token_address: '0x2956356cd2a2bf3202f771f50d3d14a367b48070', 
+      token_name: 'Ethereum', 
+      token_symbol: 'ETH', 
+      amount: 5, 
+      task_id: taskId
+    }
+  );
 
-  //token events
+  const resultFundings2 = await Axios.post(
+    "/api/v1/task_fundings/",
+    {
+      token_address: '0x2956356cd2a2bf3202f771f50d3d14a367b48070', 
+      token_name: 'Ethereum', 
+      token_symbol: 'ETH', 
+      amount: 20, 
+      task_id: taskId
+    }
+  );
+  notify("task fundings added");
+
+  const resultTaskEvent = await Axios.post(
+    "/api/v1/create_task_event/",
+    {
+      attachment_link_test: 'http://linksomewhere.co',
+      event_type: 1,
+      task_id: taskId
+    }
+  );
+  notify("task event added");
+ 
+  //event verifications
 }
