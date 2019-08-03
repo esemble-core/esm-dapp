@@ -30,7 +30,6 @@ export default function ShowTask() {
   
   /* just user names */
   React.useEffect(() => {
-    console.log("in showtask.useeffect[task] change")
     if (task && task.working_on){     
       const mappedNames = task.working_on.map(user => user.name );
       setUserNames(mappedNames);
@@ -38,13 +37,7 @@ export default function ShowTask() {
   }, [task])
 
 
- 
-  /*
-    if you retrieve the event types and dynamically render the components, you will not have to actually
-    have to refer to the id, the component can use the id that comes with the json
-  */
-
-  console.log(events)
+  console.log(events);
 
   return (
     <React.Fragment>
@@ -64,7 +57,6 @@ export default function ShowTask() {
           <Button
             type="dashed"
             onClick={ () => {
-              console.log("adding design review")
               setShowDesign(true);
             }}
           >
@@ -73,7 +65,6 @@ export default function ShowTask() {
           <Button
             type="dashed"
             onClick={ () => {
-              console.log("adding task review")
               setShowTask(true);
             }}
           >
@@ -82,7 +73,6 @@ export default function ShowTask() {
           <Button
             type="dashed"
             onClick={ () => {
-              console.log("adding completion review")
               setShowComplete(true);
             }}
           >
@@ -99,9 +89,9 @@ export default function ShowTask() {
       </div>
 
 
-      {showDesign ? <TaskEvent eventTypeName={TaskEventTypes.DESIGN_REVIEW} eventTypes={eventTypes}/> :''}
-      {showTask ? <TaskEvent eventTypeName={TaskEventTypes.TASK_REVIEW} eventTypes={eventTypes}/> :''}
-      {showComplete ? <TaskEvent eventTypeName={TaskEventTypes.COMPLETION_REVIEW} eventTypes={eventTypes}/> :''}
+      {showDesign ? <TaskEvent taskId={task.id} eventTypeName={TaskEventTypes.DESIGN_REVIEW} eventTypes={eventTypes}/> :''}
+      {showTask ? <TaskEvent taskId={task.id} eventTypeName={TaskEventTypes.TASK_REVIEW} eventTypes={eventTypes}/> :''}
+      {showComplete ? <TaskEvent taskId={task.id} eventTypeName={TaskEventTypes.COMPLETION_REVIEW} eventTypes={eventTypes}/> :''}
 
    </React.Fragment>
   )

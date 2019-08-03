@@ -1,9 +1,13 @@
 import React from 'react'
 import { Card, Input, Button } from 'antd';
-import { IEventType } from '../../../common/Interfaces';
+import { IEventType, IVerifiableTaskEvent } from '../../../common/Interfaces';
+import { Store } from '../../../common/Store';
+import Task from '../../../views/Task';
+import { notifyWarn, submitEvent, notify } from '../../../common/Actions';
 
 
 export interface ITaskEventProps{
+  taskId: number| undefined;
   eventTypeName: TaskEventTypes;
   eventTypes: Array<IEventType>;
 }
@@ -16,8 +20,18 @@ export enum TaskEventTypes {
 
 
 export default function TaskEvent(props: ITaskEventProps) {
+  const { dispatch } = React.useContext(Store);
   const [linkText, setLinkText] = React.useState('');
+  const [eventTypeId, setEventTypeId] = React.useState(-1);
+  const [eventTypeObj, setEventTypeObj] = React.useState<IVerifiableTaskEvent| any>({});
   
+
+  React.useEffect(() => {
+    setEventTypeObj(eventTypeFor(props.eventTypeName));
+  }, [props])
+
+
+ 
   const eventTypeFor = (eventTypeName: TaskEventTypes): IEventType => {
     let retval:IEventType = {
       name: '',
@@ -26,10 +40,13 @@ export default function TaskEvent(props: ITaskEventProps) {
 
     for (let i=0; i < props.eventTypes.length; i++){
       if (i===0 && props.eventTypeName===TaskEventTypes.DESIGN_REVIEW){
+        setEventTypeId(1);
         return props.eventTypes[i];
       }else if (i===1 && props.eventTypeName===TaskEventTypes.TASK_REVIEW){
+        setEventTypeId(2);
         return props.eventTypes[i];
       }else if (i===2 && props.eventTypeName===TaskEventTypes.COMPLETION_REVIEW){
+        setEventTypeId(3);
         return props.eventTypes[i];
       }
     }
@@ -43,12 +60,12 @@ export default function TaskEvent(props: ITaskEventProps) {
   }
 
 
-  const eventTypeObj: IEventType = eventTypeFor(props.eventTypeName);
+  
 
   return (
     <div style={{ background: '#ECECEC', padding: '30px' }}>
       <Card title={eventTypeObj.name} bordered={false} > 
-        <p className="strong-p">{eventTypeObj.description}</p>
+        <p>{eventTypeObj.description}</p>
         <Input
           id="submission link"
           className="form-control"
@@ -63,7 +80,16 @@ export default function TaskEvent(props: ITaskEventProps) {
           <Button
             type="dashed"
             onClick={async () => {
-              console.log("submitting event");
+              if (props.taskId && props.taskId > 0){
+                let event:IVerifiableTaskEvent = {
+                  task_id: props.taskId,
+                  event_type_id: eventTypeId,
+                  attachment_link_text: linkText
+                }
+                await submitEvent(dispatch, event);
+              } else {
+                notifyWarn("The task id was not valid, a valid task id is required");
+              }             
             }}
           >
             Submit

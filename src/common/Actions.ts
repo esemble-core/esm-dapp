@@ -2,7 +2,7 @@ import _ from "lodash";
 import { toast } from "react-toastify";
 import { ActionType, Store } from "./Store";
 import Axios from "axios";
-import { Dispatch, ITask, IUser, IProject } from './Interfaces';
+import { Dispatch, ITask, IUser, IProject, IVerifiableTaskEvent } from './Interfaces';
 import React from 'react';
 import { async } from "q";
 
@@ -21,7 +21,23 @@ export const notifyWarn = (msg: string) => {
 };
 
 
-export const fetchEventTypes = async(dispatch: Dispatch) => {
+export const submitEvent = async (dispatch: Dispatch, event: IVerifiableTaskEvent) => {
+  const result = await Axios.post(
+    "/api/v1/create_task_event",
+    {
+      attachment_link_text: event.attachment_link_text,
+      task_id: event.task_id,
+      event_type_id: event.event_type_id
+    });
+    //dispatch
+      //--store needs to find this task 
+      //--- store needs to append this event to events
+      // or refetch
+    notify("information submitted");
+  return result;
+}
+
+export const fetchEventTypes = async (dispatch: Dispatch) => {
   const result = await Axios.get('/api/v1/task_event_types');
   dispatch({
     type: ActionType.SET_EVENT_TYPES,
