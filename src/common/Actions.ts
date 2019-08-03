@@ -21,6 +21,15 @@ export const notifyWarn = (msg: string) => {
 };
 
 
+export const fetchEventTypes = async(dispatch: Dispatch) => {
+  const result = await Axios.get('/api/v1/task_event_types');
+  dispatch({
+    type: ActionType.SET_EVENT_TYPES,
+    payload: result.data.task_event_types
+  });
+}
+
+
 export const proposeProject = async(project: IProject) => {
   const result = await Axios.post(
     "/api/v1/projects",

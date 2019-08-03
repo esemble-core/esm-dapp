@@ -14,7 +14,8 @@ export enum ActionType {
   SET_CURRENT_PROJECT = "esm/CURRENT_PROJECT",
   SET_TASKS = "esm/TASKS",
   ADD_TASK = "esm/ADD_TASK",
-  SET_CURRENT_TASK = "esm/CURRENT_TASK"
+  SET_CURRENT_TASK = "esm/CURRENT_TASK",
+  SET_EVENT_TYPES = "esm/EVENT_TYPES"
 }
 
 
@@ -24,7 +25,8 @@ const initialState: IAppState = {
     projects: [],
     currentProject: {},
     tasks: [],
-    currentTask: {}
+    currentTask: {},
+    eventTypes: []
 };
 
 
@@ -63,7 +65,11 @@ function reducer(state: IAppState, action: IAction | any): IAppState {
         hydratedTask.events = action.payload[3];
         return {
           ...state, currentTask: hydratedTask
-        }
+      }
+    case ActionType.SET_EVENT_TYPES:
+      return {
+        ...state, eventTypes: action.payload
+      }
     default:
       return state;
   }

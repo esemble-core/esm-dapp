@@ -1,19 +1,25 @@
 import React from 'react'
 import { Store } from '../../../common/Store';
 import { idFromUrl } from '../../../utils/WebUtil';
-import { fetchTask } from '../../../common/Actions';
-import { ITask, IUser } from './../../../common/Interfaces';
-import { Card } from 'antd';
+import { fetchTask, fetchEventTypes } from '../../../common/Actions';
+import { ITask, IUser, IEventType, IVerifiableTaskEvent } from './../../../common/Interfaces';
+import { Card, Button } from 'antd';
+
 
 export default function ShowTask() {
   const { state, dispatch } = React.useContext(Store);
   const [userNames, setUserNames] = React.useState<any>([]);
-  const task:ITask = state.currentTask;
+  const task: ITask = state.currentTask;
+  const events: Array<IVerifiableTaskEvent>| undefined = task.events;
+  const eventTypes: Array<IEventType> = state.eventTypes;
   //const users = state.currentTask.include; //include node from json
+
+
 
   React.useEffect(() => {
     const loadTask = async() => {
       let taskId = idFromUrl();
+      await fetchEventTypes(dispatch);
       await fetchTask(dispatch, taskId);
     }
     loadTask();
@@ -30,6 +36,8 @@ export default function ShowTask() {
   }, [task])
 
 
+  console.log("events", events);
+
   return (
     <React.Fragment>
       <div style={{ background: '#ECECEC', padding: '30px' }}>
@@ -44,6 +52,34 @@ export default function ShowTask() {
                 : ''
               }
           </p>
+
+          <Button
+            type="dashed"
+            onClick={ () => {
+              console.log("adding design review")
+              
+            }}
+          >
+             Submit Design Review
+          </Button>
+          <Button
+            type="dashed"
+            onClick={ () => {
+              console.log("adding task review")
+              
+            }}
+          >
+             Submit Task Review 
+          </Button>
+          <Button
+            type="dashed"
+            onClick={ () => {
+              console.log("adding completion review")
+              
+            }}
+          >
+             Submit for Completion
+          </Button>
         </Card>
       </div>
 
@@ -52,7 +88,14 @@ export default function ShowTask() {
           { userNames.toString() }
         </Card>
       </div>
-      <div style={{ background: '#ECECEC', padding: '30px' }}>
+   </React.Fragment>
+  )
+}
+
+
+/*
+
+ <div style={{ background: '#ECECEC', padding: '30px' }}>
         <Card title="Design submission" bordered={false} > 
           <p>It is generally expected that before you work on your task you submit a Design
             for the community to review and provide you suggestion on. This will also confirm 
@@ -73,6 +116,5 @@ export default function ShowTask() {
 
         </Card>
       </div>
-   </React.Fragment>
-  )
-}
+
+*/

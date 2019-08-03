@@ -14,6 +14,7 @@ export interface IAppState {
   currentProject: IProject |any;
   tasks: Array<ITask>;
   currentTask: ITask |any;
+  eventTypes: Array<IEventType>;
 }
 
 export interface IUser {
@@ -46,6 +47,11 @@ export interface IVerifiableTaskEvent {
   event_type: number;
   attachment_link_text: string;
   verifications ?: Array<ITaskEventVerification>;
+}
+
+export interface IEventType {
+  name: string;
+  description: string;
 }
 
 export interface ITaskEventVerification {
