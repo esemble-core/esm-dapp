@@ -4,6 +4,7 @@ import { idFromUrl } from '../../../utils/WebUtil';
 import { fetchTask, fetchEventTypes } from '../../../common/Actions';
 import { ITask, IUser, IEventType, IVerifiableTaskEvent } from './../../../common/Interfaces';
 import { Card, Button } from 'antd';
+import TaskEvent, { TaskEventTypes } from './TaskEvent';
 
 
 export default function ShowTask() {
@@ -12,8 +13,9 @@ export default function ShowTask() {
   const task: ITask = state.currentTask;
   const events: Array<IVerifiableTaskEvent>| undefined = task.events;
   const eventTypes: Array<IEventType> = state.eventTypes;
-  //const users = state.currentTask.include; //include node from json
-
+  const [showDesign, setShowDesign] = React.useState(false);
+  const [showTask, setShowTask] = React.useState(false);
+  const [showComplete, setShowComplete] = React.useState(false);
 
 
   React.useEffect(() => {
@@ -36,7 +38,13 @@ export default function ShowTask() {
   }, [task])
 
 
-  console.log("events", events);
+ 
+  /*
+    if you retrieve the event types and dynamically render the components, you will not have to actually
+    have to refer to the id, the component can use the id that comes with the json
+  */
+
+  console.log(events)
 
   return (
     <React.Fragment>
@@ -57,7 +65,7 @@ export default function ShowTask() {
             type="dashed"
             onClick={ () => {
               console.log("adding design review")
-              
+              setShowDesign(true);
             }}
           >
              Submit Design Review
@@ -66,7 +74,7 @@ export default function ShowTask() {
             type="dashed"
             onClick={ () => {
               console.log("adding task review")
-              
+              setShowTask(true);
             }}
           >
              Submit Task Review 
@@ -75,7 +83,7 @@ export default function ShowTask() {
             type="dashed"
             onClick={ () => {
               console.log("adding completion review")
-              
+              setShowComplete(true);
             }}
           >
              Submit for Completion
@@ -83,11 +91,18 @@ export default function ShowTask() {
         </Card>
       </div>
 
+
       <div style={{ background: '#ECECEC', padding: '30px' }}>
         <Card title="Users working on this" bordered={false} > 
           { userNames.toString() }
         </Card>
       </div>
+
+
+      {showDesign ? <TaskEvent eventTypeName={TaskEventTypes.DESIGN_REVIEW} eventTypes={eventTypes}/> :''}
+      {showTask ? <TaskEvent eventTypeName={TaskEventTypes.TASK_REVIEW} eventTypes={eventTypes}/> :''}
+      {showComplete ? <TaskEvent eventTypeName={TaskEventTypes.COMPLETION_REVIEW} eventTypes={eventTypes}/> :''}
+
    </React.Fragment>
   )
 }
