@@ -55,6 +55,15 @@ export interface IEventType {
   description: string;
 }
 
+export enum TaskEventTypes {
+  DESIGN_REVIEW = "Submit for Design Review",
+  TASK_REVIEW = "Submit for Task Review",
+  COMPLETION_REVIEW = "Submit for Completion Review",
+  DESIGN_REVIEW_ID = 1,
+  DESIGN_TASK_REVIEW_ID = 2,
+  COMPLETION_REVIEW_ID = 3
+}
+
 export interface ITaskEventVerification {
   comment: string;
   user_id: number;

@@ -1,24 +1,32 @@
 import React from 'react'
 import { Card, Input, Button } from 'antd';
-import { IEventType, IVerifiableTaskEvent } from '../../../common/Interfaces';
+import { IEventType, IVerifiableTaskEvent, TaskEventTypes } from '../../../common/Interfaces';
 import { Store } from '../../../common/Store';
 import Task from '../../../views/Task';
 import { notifyWarn, submitEvent, notify } from '../../../common/Actions';
 
 
 export interface ITaskEventProps{
-  taskId: number| undefined;
-  eventTypeName: TaskEventTypes;
-  eventTypes: Array<IEventType>;
-}
-
-export enum TaskEventTypes {
-  DESIGN_REVIEW = "Submit for Design Review",
-  TASK_REVIEW = "Submit for Task Review",
-  COMPLETION_REVIEW = "Submit for Completion Review"
+  event: IVerifiableTaskEvent | undefined;
+  eventType: IEventType;
 }
 
 
+export default function TaskEvent(props: ITaskEventProps) {
+  
+  
+  
+  return (
+    <React.Fragment>
+      <p>TaskEvent</p>
+    </React.Fragment>
+  )
+}
+
+
+
+
+/*
 export default function TaskEvent(props: ITaskEventProps) {
   const { dispatch } = React.useContext(Store);
   const [linkText, setLinkText] = React.useState('');
@@ -58,14 +66,14 @@ export default function TaskEvent(props: ITaskEventProps) {
     }
     return retval;
   }
-
+  
 
   
 
   return (
     <div style={{ background: '#ECECEC', padding: '30px' }}>
-      <Card title={eventTypeObj.name} bordered={false} > 
-        <p>{eventTypeObj.description}</p>
+      <Card title={eventType.name} bordered={false} > 
+        <p>{eventType.description}</p>
         <Input
           id="submission link"
           className="form-control"
@@ -100,3 +108,4 @@ export default function TaskEvent(props: ITaskEventProps) {
     </div>
   )
 }
+*/

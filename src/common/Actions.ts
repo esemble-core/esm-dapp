@@ -29,10 +29,14 @@ export const submitEvent = async (dispatch: Dispatch, event: IVerifiableTaskEven
       task_id: event.task_id,
       event_type_id: event.event_type_id
     });
-    //dispatch
-      //--store needs to find this task 
-      //--- store needs to append this event to events
-      // or refetch
+
+      dispatch({
+          type: ActionType.ADD_EVENT,
+          payload: event
+        })
+    /* Refetch, issue with event objects json in currentTask */
+    //await fetchTask(dispatch, event.task_id.toString());
+
     notify("information submitted");
   return result;
 }
