@@ -18,7 +18,7 @@ export default function AllProjects() {
 
 
   return (
-    <div style={{ background: '#ECECEC', padding: '30px' }}>
+    <div className="antDDefault">
     <Card title="All Projects" bordered={false} >
     <List
           header="Projects"

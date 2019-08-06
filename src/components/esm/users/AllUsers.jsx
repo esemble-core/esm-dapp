@@ -18,7 +18,7 @@ export default function AllUsers() {
 
 
   return (
-    <div style={{ background: '#ECECEC', padding: '30px' }}>
+    <div className="antDDefault">
     <Card title="All Users" bordered={false} >
     <List
           header="Users"

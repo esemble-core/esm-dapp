@@ -13,7 +13,7 @@ export default function AddTask(props:any) {
   console.log("projectid", projectId);
 
   return (
-    <div style={{ background: '#ECECEC', padding: '30px' }}>
+    <div className="antDDefault">
     <Card title="Add New Task" bordered={false}> 
       <Input
           id="add-task-name"

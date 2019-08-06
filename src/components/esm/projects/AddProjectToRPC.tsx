@@ -35,7 +35,7 @@ export default function AddProjectToRPC() {
   };
 
   return (
-    <div style={{ background: "#ECECEC", padding: "30px" }}>
+    <div className="antDDefault">
       <Card title="Propose a Project" bordered={false}>
         <Form
           {...formItemLayout}

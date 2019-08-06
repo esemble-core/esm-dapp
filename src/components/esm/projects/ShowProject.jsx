@@ -28,7 +28,7 @@ export default function ShowProject(props) {
   
   return (
     <React.Fragment>
-      <div style={{ background: '#ECECEC', padding: '30px' }}>
+      <div className="antDDefault">
         <Card title="Projects" bordered={false} > 
             <p>Name: {project.name}</p>
             <p>Description: {project.description}</p>
@@ -37,7 +37,7 @@ export default function ShowProject(props) {
         </Card>
       </div>
       
-      <div style={{ background: '#ECECEC', padding: '30px' }}>
+      <div className="antDDefault">
         <Card title="Tasks for Project" bordered={false}> 
 
         <List

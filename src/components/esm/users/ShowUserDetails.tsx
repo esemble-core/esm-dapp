@@ -7,7 +7,7 @@ export default function ShowUserDetails(props:any) {
   const ethAcct: string = props.ethAcct;
 
   return (
-    <div style={{ background: "#ECECEC", padding: "30px" }}>
+    <div className="antDDefault">
       <Card title="Profile" bordered={false}>
         <p>ETH address:{ethAcct}</p>
         <p>name:{user.name}</p>

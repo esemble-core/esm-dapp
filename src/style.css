@@ -6,9 +6,11 @@ body{
   color: #505962;
 }
 
-.logo {
-
+.antDDefault {
+  background: #ECECEC;
+  padding: 30px;
 }
+
 
 .logo-text {
   font-size: 1.9rem;

@@ -17,7 +17,7 @@ export default function Projects() {
         <div className="heading-underline"></div>
         <Web3Provider connectors={web3Config.connectors} libraryName={web3Config.libraryName} web3Api={web3Config.web3Api}> 
           <AllProjects />
-          <div style={{ background: "#ECECEC", padding: "30px" }}>
+          <div className="antDDefault">
               <Button
               type="dashed"
               onClick={() => {

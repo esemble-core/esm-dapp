@@ -8,7 +8,7 @@ export default function Products() {
       <div className="col-12">
         <h3 className="heading text-center">Products</h3>
         <div className="heading-underline"></div>
-        <div style={{ background: '#ECECEC', padding: '30px' }}>
+        <div className="antDDefault">
         <Card title="Products" bordered={false} >
          <p>Products are under development by the community and coming soon!</p>
         </Card>

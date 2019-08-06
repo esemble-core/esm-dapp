@@ -36,7 +36,7 @@ export default function ShowTask() {
 
   return (
     <React.Fragment>
-      <div style={{ background: '#ECECEC', padding: '30px' }}>
+      <div className="antDDefault">
         <Card title="Task" bordered={false} > 
           <p>Task Name: {task.name}</p>
           <p>Complete: {task.done ? "yes" : "not yet"}</p>

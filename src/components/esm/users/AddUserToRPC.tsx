@@ -13,7 +13,7 @@ export default function AddUserToRPC() {
   const { dispatch } = React.useContext(Store);
 
   return (
-    <div style={{ background: "#ECECEC", padding: "30px" }}>
+    <div className="antDDefault">
       <Card title="Add User" bordered={false}>
         <p className="strong-p">Enter details for user</p>
         <Input

@@ -48,7 +48,7 @@ export default function TaskEventContainer(props :TaskEventContainerProps) {
 
   return (
     <React.Fragment>
-      <div style={{ background: '#ECECEC', padding: '30px' }}>
+      <div className="antDDefault">
         <Card title="Task Events" bordered={false} > 
           
         {!haveDesignEvent ? 
@@ -90,7 +90,23 @@ export default function TaskEventContainer(props :TaskEventContainerProps) {
        </Card>
       </div>
 
-      
+      {haveDesignEvent || showDesign ? 
+          <TaskEvent event={designEvent}/>
+        :
+          ''
+      }
+
+      {haveTaskEvent || showTask ? 
+          <TaskEvent event={taskEvent}/>
+        :
+          ''
+      }
+
+      {completionEvent || showComplete ? 
+          <TaskEvent event={completionEvent}/>
+        :
+          ''
+      }
 
     </React.Fragment>
   )

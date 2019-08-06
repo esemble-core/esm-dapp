@@ -7,14 +7,16 @@ import { notifyWarn, submitEvent, notify } from '../../../common/Actions';
 
 
 export interface ITaskEventProps{
-  event: IVerifiableTaskEvent | undefined;
-  eventType: IEventType;
+  event: IVerifiableTaskEvent| undefined;
 }
 
 
 export default function TaskEvent(props: ITaskEventProps) {
-  
-  
+  let event: IVerifiableTaskEvent| undefined = props.event;
+  //let eventType: IEventType = props.eventType;
+
+  console.log("event:", event);
+
   
   return (
     <React.Fragment>
@@ -71,7 +73,7 @@ export default function TaskEvent(props: ITaskEventProps) {
   
 
   return (
-    <div style={{ background: '#ECECEC', padding: '30px' }}>
+    <div className="antDDefault"}>
       <Card title={eventType.name} bordered={false} > 
         <p>{eventType.description}</p>
         <Input

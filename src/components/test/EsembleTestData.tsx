@@ -7,7 +7,7 @@ export default function EsembleTestData() {
 
   return (
     <React.Fragment>
-      <div style={{ background: '#ECECEC', padding: '30px' }}>
+      <div className="antDDefault">
         <Card title="Generate Test Project" bordered={false}> 
           <Input
             id="add-prefix"
