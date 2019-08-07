@@ -1,7 +1,8 @@
 import React from 'react'
-import { Card } from 'antd';
+import { Card, Input } from 'antd';
 import { IEventType, IVerifiableTaskEvent } from '../../../common/Interfaces';
 import { Store } from '../../../common/Store';
+import { Button } from 'antd/lib/radio';
 
 
 
@@ -15,12 +16,16 @@ export default function TaskEvent(props: ITaskEventProps) {
   const { state } = React.useContext(Store);
   const eventTypes: Array<IEventType> = state.eventTypes;
   const [eventType, setEventType] = React.useState<IEventType| undefined>(undefined);
-  
+  const [haveEventData, setHaveEventData] = React.useState<boolean>(false);
+
 
   React.useEffect(() => {
     if (event){
-      let eventType: IEventType| undefined = eventTypeFor(event);
+      if (event.event_type_id && event.task_id){
+        setHaveEventData(true);
+      }
 
+      let eventType: IEventType| undefined = eventTypeFor(event);
       if (eventType){
         setEventType(eventType);
       }else {
@@ -45,14 +50,56 @@ export default function TaskEvent(props: ITaskEventProps) {
   
   return (
     <React.Fragment>
-       <div className="antDDefault">
-        <Card title="Task Events" bordered={false} > 
+      {haveEventData ?
+        <ShowEventData event={event} eventType={eventType} />
+      :
+        <SubmitEventData eventType={eventType} />
+      }
+    </React.Fragment>
+  )
+}
 
+
+function ShowEventData(props: any) {
+  const eventType = props.eventType;
+  const event: IVerifiableTaskEvent = props.event;
+
+  return (
+    <React.Fragment>
+      <div className="antDDefault">
+      <Card title={eventType? eventType.name : 'Task Events'} bordered={false} > 
+        <p>Event Type: {eventType.name}</p>
+        <p>Attachment Link: {event.attachment_link_text}</p>
+        <Button>
+          Verify
+        </Button>
+        <Button>
+          Update
+        </Button>
+      </Card>
+    </div>
+  </React.Fragment>
+  )
+}
+
+function SubmitEventData(props: any) {
+  const eventType = props.eventType;
+
+  return (
+    <React.Fragment>
+      <div className="antDDefault">
+        <Card title={eventType? eventType.name : 'Task Events'} bordered={false} > 
+          <p>Event Description: {eventType ? eventType.description : ''}</p>
+          <Input></Input>
+          <Button>Submit For Review</Button>
         </Card>
       </div>
     </React.Fragment>
   )
-}
+} 
+
+ 
+
 
 
 

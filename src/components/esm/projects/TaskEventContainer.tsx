@@ -111,35 +111,3 @@ export default function TaskEventContainer(props :TaskEventContainerProps) {
     </React.Fragment>
   )
 }
-
-/*
-{showDesign ? <TaskEvent taskId={task.id} eventTypeName={TaskEventTypes.DESIGN_REVIEW} eventTypes={eventTypes}/> :''}
-{showTask ? <TaskEvent taskId={task.id} eventTypeName={TaskEventTypes.TASK_REVIEW} eventTypes={eventTypes}/> :''}
-{showComplete ? <TaskEvent taskId={task.id} eventTypeName={TaskEventTypes.COMPLETION_REVIEW} eventTypes={eventTypes}/> :''}
-
-
-<div style={{ background: '#ECECEC', padding: '30px' }}>
-        <Card title="Design submission" bordered={false} > 
-          <p>It is generally expected that before you work on your task you submit a Design
-            for the community to review and provide you suggestion on. This will also confirm 
-            the funding for the task        
-         </p>
-        </Card>
-      </div>
-      <div style={{ background: '#ECECEC', padding: '30px' }}>
-        <Card title="Task submission" bordered={false} > 
-          <p>Submit a link to the completed task for the community to review</p>
-
-        </Card>
-      </div>
-
-      <div style={{ background: '#ECECEC', padding: '30px' }}>
-        <Card title="Task completion" bordered={false} > 
-          <p>Mark this task as complete for the community to review</p>
-
-        </Card>
-      </div>
-/</div>
-
-
-*/
