@@ -1,5 +1,5 @@
 import React from 'react'
-import { IVerifiableTaskEvent, TaskEventTypes } from '../../../common/Interfaces';
+import { IVerifiableTaskEvent, ITaskEventTypes } from '../../../common/Interfaces';
 import { Card, Button } from 'antd';
 import TaskEvent from './TaskEvent';
 
@@ -30,13 +30,13 @@ export default function TaskEventContainer(props :TaskEventContainerProps) {
   React.useEffect(() => {
     events.forEach(e => {
       //console.log("event id, task_id, attachment:", e.event_type_id, e.task_id, e.attachment_link_text);
-      if (e.event_type_id===TaskEventTypes.DESIGN_REVIEW_ID){
+      if (e.event_type_id===ITaskEventTypes.DESIGN_REVIEW_ID){
         setHaveDesignEvent(true);
         setDesignEvent(e);
-      }else if (e.event_type_id===TaskEventTypes.TASK_REVIEW_ID){
+      }else if (e.event_type_id===ITaskEventTypes.TASK_REVIEW_ID){
         setHaveTaskEvent(true);
         setTaskEvent(e);
-      }else if (e.event_type_id===TaskEventTypes.COMPLETION_REVIEW_ID){
+      }else if (e.event_type_id===ITaskEventTypes.COMPLETION_REVIEW_ID){
         setHaveCompletionEvent(true);
         setCompletionEvent(e);
       }else {
@@ -91,19 +91,19 @@ export default function TaskEventContainer(props :TaskEventContainerProps) {
       </div>
 
       {haveDesignEvent || showDesign ? 
-          <TaskEvent event={designEvent} />
+          <TaskEvent event={designEvent} eventTypeId={ITaskEventTypes.DESIGN_REVIEW_ID} />
         :
           ''
       }
 
       {haveTaskEvent || showTask ? 
-          <TaskEvent event={taskEvent}/>
+          <TaskEvent event={taskEvent} eventTypeId={ITaskEventTypes.TASK_REVIEW_ID}/>
         :
           ''
       }
 
       {completionEvent || showComplete ? 
-          <TaskEvent event={completionEvent}/>
+          <TaskEvent event={completionEvent} eventTypeId={ITaskEventTypes.COMPLETION_REVIEW_ID}/>
         :
           ''
       }

@@ -56,7 +56,7 @@ export interface IEventType {
   description: string;
 }
 
-export enum TaskEventTypes {
+export enum ITaskEventTypes {
   DESIGN_REVIEW = "Submit for Design Review",
   TASK_REVIEW = "Submit for Task Review",
   COMPLETION_REVIEW = "Submit for Completion Review",

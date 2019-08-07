@@ -2,7 +2,7 @@ import React from 'react'
 import { Store } from '../../../common/Store';
 import { idFromUrl } from '../../../utils/WebUtil';
 import { fetchTask, fetchEventTypes } from '../../../common/Actions';
-import { ITask, IUser, IEventType, IVerifiableTaskEvent, TaskEventTypes } from './../../../common/Interfaces';
+import { ITask, IUser, IEventType, IVerifiableTaskEvent } from './../../../common/Interfaces';
 import { Card, Button } from 'antd';
 import TaskEventContainer from './TaskEventContainer';
 

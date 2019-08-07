@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, Input } from 'antd';
-import { IEventType, IVerifiableTaskEvent } from '../../../common/Interfaces';
+import { IEventType, IVerifiableTaskEvent, ITaskEventTypes } from '../../../common/Interfaces';
 import { Store } from '../../../common/Store';
 import { Button } from 'antd/lib/radio';
 
@@ -8,11 +8,13 @@ import { Button } from 'antd/lib/radio';
 
 export interface ITaskEventProps{
   event: IVerifiableTaskEvent| undefined;
+  eventTypeId: ITaskEventTypes;
 }
 
 
 export default function TaskEvent(props: ITaskEventProps) {
   let event: IVerifiableTaskEvent| undefined = props.event;
+  let eventTypeId: ITaskEventTypes = props.eventTypeId;
   const { state } = React.useContext(Store);
   const eventTypes: Array<IEventType> = state.eventTypes;
   const [eventType, setEventType] = React.useState<IEventType| undefined>(undefined);
@@ -20,34 +22,33 @@ export default function TaskEvent(props: ITaskEventProps) {
 
 
   React.useEffect(() => {
-    if (event){
-      if (event.event_type_id && event.task_id){
-        setHaveEventData(true);
-      }
+    let eventType: IEventType| undefined = undefined;
 
-      let eventType: IEventType| undefined = eventTypeFor(event);
-      if (eventType){
-        setEventType(eventType);
-      }else {
-        console.error("Event type is unexpectedly not resolved in TaskEvent.useEffect()");
-      }
-    } else {
-      console.warn("expecting an event in TaskEvent.useEffect()");
+    if (event && event.event_type_id && event.task_id){
+      setHaveEventData(true);
+      eventType = eventTypeFor(event.event_type_id);
+    }else if (eventTypeId){
+      eventType = eventTypeFor(eventTypeId);
+    }else {
+      console.error("was expecting data that resolved to event type, but it was not found");
     }
+    setEventType(eventType);
   }, [props]);
 
 
-  const eventTypeFor = (e: IVerifiableTaskEvent):IEventType| undefined => {
+  const eventTypeFor = (id: any) => {
+    console.log("eventFor(), id:", id)
     let retVal:IEventType| undefined = undefined;
     eventTypes.forEach(et => {
-      if (et.id===e.event_type_id){
+      if (et.id === id){
         retVal = et;
       }
     });
     return retVal;
   }
 
-  
+  console.log("haveEventData", haveEventData);
+
   return (
     <React.Fragment>
       {haveEventData ?
@@ -84,6 +85,8 @@ function ShowEventData(props: any) {
 
 function SubmitEventData(props: any) {
   const eventType = props.eventType;
+
+  console.log("SubmitEventData(), props:", props);
 
   return (
     <React.Fragment>
