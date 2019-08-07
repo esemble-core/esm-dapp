@@ -1,9 +1,8 @@
 import React from 'react'
-import { Card, Input, Button } from 'antd';
-import { IEventType, IVerifiableTaskEvent, TaskEventTypes } from '../../../common/Interfaces';
+import { Card } from 'antd';
+import { IEventType, IVerifiableTaskEvent } from '../../../common/Interfaces';
 import { Store } from '../../../common/Store';
-import Task from '../../../views/Task';
-import { notifyWarn, submitEvent, notify } from '../../../common/Actions';
+
 
 
 export interface ITaskEventProps{
@@ -13,14 +12,44 @@ export interface ITaskEventProps{
 
 export default function TaskEvent(props: ITaskEventProps) {
   let event: IVerifiableTaskEvent| undefined = props.event;
-  //let eventType: IEventType = props.eventType;
+  const { state } = React.useContext(Store);
+  const eventTypes: Array<IEventType> = state.eventTypes;
+  const [eventType, setEventType] = React.useState<IEventType| undefined>(undefined);
+  
 
-  console.log("event:", event);
+  React.useEffect(() => {
+    if (event){
+      let eventType: IEventType| undefined = eventTypeFor(event);
+
+      if (eventType){
+        setEventType(eventType);
+      }else {
+        console.error("Event type is unexpectedly not resolved in TaskEvent.useEffect()");
+      }
+    } else {
+      console.warn("expecting an event in TaskEvent.useEffect()");
+    }
+  }, [props]);
+
+
+  const eventTypeFor = (e: IVerifiableTaskEvent):IEventType| undefined => {
+    let retVal:IEventType| undefined = undefined;
+    eventTypes.forEach(et => {
+      if (et.id===e.event_type_id){
+        retVal = et;
+      }
+    });
+    return retVal;
+  }
 
   
   return (
     <React.Fragment>
-      <p>TaskEvent</p>
+       <div className="antDDefault">
+        <Card title="Task Events" bordered={false} > 
+
+        </Card>
+      </div>
     </React.Fragment>
   )
 }

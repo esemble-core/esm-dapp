@@ -8,6 +8,7 @@ export interface TaskEventContainerProps {
   events: Array<IVerifiableTaskEvent>;
 }
 
+
 export default function TaskEventContainer(props :TaskEventContainerProps) {
   const events: Array<IVerifiableTaskEvent> = props.events;
   /* Whether button should be displayed, based on current state */
@@ -32,7 +33,7 @@ export default function TaskEventContainer(props :TaskEventContainerProps) {
       if (e.event_type_id===TaskEventTypes.DESIGN_REVIEW_ID){
         setHaveDesignEvent(true);
         setDesignEvent(e);
-      }else if (e.event_type_id===TaskEventTypes.DESIGN_TASK_REVIEW_ID){
+      }else if (e.event_type_id===TaskEventTypes.TASK_REVIEW_ID){
         setHaveTaskEvent(true);
         setTaskEvent(e);
       }else if (e.event_type_id===TaskEventTypes.COMPLETION_REVIEW_ID){
@@ -50,7 +51,6 @@ export default function TaskEventContainer(props :TaskEventContainerProps) {
     <React.Fragment>
       <div className="antDDefault">
         <Card title="Task Events" bordered={false} > 
-          
         {!haveDesignEvent ? 
           <Button
             type="dashed"
@@ -91,7 +91,7 @@ export default function TaskEventContainer(props :TaskEventContainerProps) {
       </div>
 
       {haveDesignEvent || showDesign ? 
-          <TaskEvent event={designEvent}/>
+          <TaskEvent event={designEvent} />
         :
           ''
       }
