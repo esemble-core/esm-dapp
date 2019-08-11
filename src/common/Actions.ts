@@ -2,7 +2,7 @@ import _ from "lodash";
 import { toast } from "react-toastify";
 import { ActionType, Store } from "./Store";
 import Axios from "axios";
-import { Dispatch, ITask, IUser, IProject, IVerifiableTaskEvent } from './Interfaces';
+import { Dispatch, ITask, IUser, IProject, IVerifiableTaskEvent, ITaskEventVerification } from './Interfaces';
 
 
 
@@ -21,6 +21,26 @@ export const notifyWarn = (msg: string) => {
     toast.warn(msg, { toastId: "nfId" });
   }
 };
+
+
+/*post('/api/v1/create_event_verification/',
+params: {
+  verifiable_task_event_id: 1,
+  user_id: 1,
+  comment: 'This is a comment, i think'
+})*/
+
+export const verifyEvent = async(dispatch: Dispatch, ev: ITaskEventVerification) => {
+  const result = await Axios.post(
+    "/api/v1/create_event_verification",
+    {
+      verifiable_task_event_id: ev.verifiable_task_event_id,
+      user_id: ev.user_id,
+      comment: ev.comment
+    });
+
+  notify("You have verified this event");
+}
 
 
 export const addEvent = async (dispatch: Dispatch, event: IVerifiableTaskEvent) => {

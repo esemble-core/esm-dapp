@@ -1,8 +1,9 @@
 import React from 'react'
 import { Card, Input, Button } from 'antd';
-import { IEventType, IVerifiableTaskEvent, ITaskEventTypes } from '../../../common/Interfaces';
+import { IEventType, IVerifiableTaskEvent, ITaskEventTypes, ITaskEventVerification } from '../../../common/Interfaces';
 import { Store } from '../../../common/Store';
-import { addEvent } from '../../../common/Actions';
+import { addEvent, verifyEvent } from '../../../common/Actions';
+import useLoadUser from '../users/useLoadUser';
 
 
 
@@ -37,7 +38,7 @@ export default function TaskEvent(props: ITaskEventProps) {
 
 
   const eventTypeFor = (id: any) => {
-    console.log("eventFor(), id:", id)
+    //console.log("eventFor(), id:", id)
     let retVal:IEventType| undefined = undefined;
     eventTypes.forEach(et => {
       if (et.id === id){
@@ -46,8 +47,6 @@ export default function TaskEvent(props: ITaskEventProps) {
     });
     return retVal;
   }
-
-  console.log("haveEventData", haveEventData);
 
   return (
     <React.Fragment>
@@ -64,6 +63,7 @@ export default function TaskEvent(props: ITaskEventProps) {
 function ShowEventData(props: any) {
   const eventType = props.eventType;
   const event: IVerifiableTaskEvent = props.event;
+  const [showVerify, setShowVerify] = React.useState<boolean>(false);
 
   return (
     <React.Fragment>
@@ -71,16 +71,75 @@ function ShowEventData(props: any) {
       <Card title={eventType? eventType.name : 'Task Events'} bordered={false} > 
         <p>Event Type: {eventType.name}</p>
         <p>Attachment Link: {event.attachment_link_text}</p>
-        <Button>
-          Verify
+                
+        <Button
+         type="dashed"
+         onClick={ async() => {
+           console.log("verifyEvent enable");
+           setShowVerify(true);
+         }}
+        >
+          Verify The Completion of this Event
         </Button>
         <Button>
           Update
         </Button>
+
+         {
+           showVerify ?
+            <SubmitEventVerification />
+           :
+            ''
+         }
+         
       </Card>
     </div>
   </React.Fragment>
   )
+}
+
+
+function SubmitEventVerification(){
+  const { state, dispatch } = React.useContext(Store);
+  useLoadUser();
+  const user = state.currentUser;
+  const task = state.currentTask;
+  const [verificationText, setVerificationText] = React.useState<string>('');
+
+  return (
+    <React.Fragment>
+      <div className="antDDefault">
+        <p>By submitting this verification you providing the community a verification that in your
+          opinion you feel this task was completed as you would have expected.
+        </p>
+        <Input
+         id="task-event-verification-id"
+         className="form-control"
+         placeholder="Comments"
+         value={verificationText}
+         onChange={(e: React.FormEvent<HTMLInputElement>) =>{
+           const { name, value }: any = e.target;
+           setVerificationText(value);
+          }}
+        />
+        <Button
+         type="dashed"
+         onClick={ async() => {
+           console.log("verfication for event:");
+
+           let eventVerification: ITaskEventVerification = {
+            comment: verificationText,
+            user_id: user.id,
+            verifiable_task_event_id: task.id
+           }
+           await verifyEvent(dispatch, eventVerification);
+         }}
+        >
+          Submit
+        </Button>
+      </div>
+    </React.Fragment>
+  );
 }
 
 function SubmitEventData(props: any) {
@@ -89,17 +148,15 @@ function SubmitEventData(props: any) {
   const eventType = props.eventType;
   const [submissionText, setSubmissionText] = React.useState<string>('');
 
-  //console.log("SubmitEventData(), props:", props);
-
   return (
     <React.Fragment>
       <div className="antDDefault">
         <Card title={eventType? eventType.name : 'Task Events'} bordered={false} > 
           <p>Event Description: {eventType ? eventType.description : ''}</p>
           <Input
-            id="task-event-id"
+            id="verification-comments-id"
             className="form-control"
-            placeholder="Url to submission"
+            placeholder="Comments"
             value={submissionText}
             onChange={(e: React.FormEvent<HTMLInputElement>) =>{
               const { name, value }: any = e.target;
