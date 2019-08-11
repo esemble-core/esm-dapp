@@ -3,16 +3,18 @@ import { toast } from "react-toastify";
 import { ActionType, Store } from "./Store";
 import Axios from "axios";
 import { Dispatch, ITask, IUser, IProject, IVerifiableTaskEvent } from './Interfaces';
-import React from 'react';
-import { async } from "q";
+
+
 
 export const notify = (msg: string, success?: boolean) => {
   !success ? toast(msg) : toast.success(msg, { autoClose: false });
 };
 
+
 export const notifyError = (msg: string) => {
   toast.error(msg, { autoClose: false });
 };
+
 
 export const notifyWarn = (msg: string) => {
   if (!toast.isActive("nfId")) {
@@ -21,7 +23,7 @@ export const notifyWarn = (msg: string) => {
 };
 
 
-export const submitEvent = async (dispatch: Dispatch, event: IVerifiableTaskEvent) => {
+export const addEvent = async (dispatch: Dispatch, event: IVerifiableTaskEvent) => {
   const result = await Axios.post(
     "/api/v1/create_task_event",
     {
@@ -34,12 +36,11 @@ export const submitEvent = async (dispatch: Dispatch, event: IVerifiableTaskEven
           type: ActionType.ADD_EVENT,
           payload: event
         })
-    /* Refetch, issue with event objects json in currentTask */
-    //await fetchTask(dispatch, event.task_id.toString());
-
-    notify("information submitted");
+      
+      notify("event information submitted");
   return result;
 }
+
 
 export const fetchEventTypes = async (dispatch: Dispatch) => {
   const result = await Axios.get('/api/v1/task_event_types');
@@ -74,7 +75,6 @@ export const fetchTask = async(dispatch: Dispatch, taskId: string| undefined) =>
     payload: [result.data.task, result.data.users_working_on, result.data.task_fundings, result.data.events]
   })
 }
-
 
 
 export const workOnTask = async (dispatch: Dispatch, user: IUser, task: ITask) => {
@@ -224,7 +224,9 @@ export const fetchUsers = async (dispatch: Dispatch, force: boolean) => {
   }
 }
 
-
+/*
+ Below this, generates a test project
+*/
 export const generateTestProject = async(prefix: string) => {
   console.log("Action.generateTestProject(), for prefix:", prefix);
   let proj: IProject = {
@@ -295,6 +297,5 @@ export const generateTestProject = async(prefix: string) => {
     }
   );
   notify("task event added");
- 
   //event verifications
 }
