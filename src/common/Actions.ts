@@ -23,13 +23,6 @@ export const notifyWarn = (msg: string) => {
 };
 
 
-/*post('/api/v1/create_event_verification/',
-params: {
-  verifiable_task_event_id: 1,
-  user_id: 1,
-  comment: 'This is a comment, i think'
-})*/
-
 export const verifyEvent = async(dispatch: Dispatch, ev: ITaskEventVerification) => {
   const result = await Axios.post(
     "/api/v1/create_event_verification",

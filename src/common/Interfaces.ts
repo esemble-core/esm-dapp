@@ -47,7 +47,7 @@ export interface IVerifiableTaskEvent {
   task_id: number;
   event_type_id: number;
   attachment_link_text: string;
-  verifications ?: Array<ITaskEventVerification>;
+  task_event_verifications ?: Array<ITaskEventVerification>;
 }
 
 export interface IEventType {

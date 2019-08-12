@@ -22,6 +22,8 @@ export default function TaskEvent(props: ITaskEventProps) {
   const [haveEventData, setHaveEventData] = React.useState<boolean>(false);
 
 
+  console.log("TaskEvent.event:", event);
+
   React.useEffect(() => {
     let eventType: IEventType| undefined = undefined;
 
@@ -71,6 +73,7 @@ function ShowEventData(props: any) {
       <Card title={eventType? eventType.name : 'Task Events'} bordered={false} > 
         <p>Event Type: {eventType.name}</p>
         <p>Attachment Link: {event.attachment_link_text}</p>
+        <p>Verifications: {JSON.stringify(event.task_event_verifications)}</p>
                 
         <Button
          type="dashed"

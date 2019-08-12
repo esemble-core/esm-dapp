@@ -30,7 +30,16 @@ export default function ShowTask() {
 
 
   React.useEffect(() => {
-    
+    const loadTask = async() => {
+      let taskId = idFromUrl();
+      await fetchEventTypes(dispatch);
+      await fetchTask(dispatch, taskId);
+    }
+    loadTask();
+  }, []);
+
+
+  React.useEffect(() => {
     if (events){
       events.forEach(e => {
         //console.log("event id, task_id, attachment:", e.event_type_id, e.task_id, e.attachment_link_text);
@@ -51,15 +60,6 @@ export default function ShowTask() {
   }, [events]);
 
 
-  React.useEffect(() => {
-    const loadTask = async() => {
-      let taskId = idFromUrl();
-      await fetchEventTypes(dispatch);
-      await fetchTask(dispatch, taskId);
-    }
-    loadTask();
-  }, [])
-
   
   /* just user names */
   React.useEffect(() => {
@@ -67,9 +67,19 @@ export default function ShowTask() {
       const mappedNames = task.working_on.map(user => user.name );
       setUserNames(mappedNames);
     }
-  }, [task])
+  }, [task]);
 
+/*
+  React.useEffect(() => {
+    const loadVerifications = async() => {
+      console.log("loading verifications...");
+    }
+    if (task){
+      loadVerifications();
+    }
+  }, [task]);
 
+*/
   return (
     <React.Fragment>
       <div className="antDDefault">
