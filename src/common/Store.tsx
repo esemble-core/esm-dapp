@@ -16,7 +16,8 @@ export enum ActionType {
   ADD_TASK = "esm/ADD_TASK",
   SET_CURRENT_TASK = "esm/CURRENT_TASK",
   SET_EVENT_TYPES = "esm/EVENT_TYPES",
-  ADD_EVENT = "esm/ADD_EVENT"
+  ADD_EVENT = "esm/ADD_EVENT",
+  ADD_VERIFICATION = "esm/ADD_VERIFICATION"
 }
 
 
@@ -66,6 +67,7 @@ function reducer(state: IAppState, action: IAction | any): IAppState {
         //hydratedTask.events = action.payload[3];
           /* Dealing with a server issue of the events not coming as normal json */
         hydratedTask.events = JSON.parse(action.payload[3]);
+
         return {
           ...state, currentTask: hydratedTask
       }
@@ -74,8 +76,6 @@ function reducer(state: IAppState, action: IAction | any): IAppState {
         ...state, eventTypes: action.payload
       }
     case ActionType.ADD_EVENT:
-      console.log("add event");
-      console.log("state", state);
       let currentTask: ITask = state.currentTask;
 
       if (currentTask && currentTask.events){
@@ -86,7 +86,10 @@ function reducer(state: IAppState, action: IAction | any): IAppState {
       } else {
         console.error("currentTask or currentTask.events unexpectedly not set in state");
       }
-      
+    case ActionType.ADD_VERIFICATION:
+        return {
+          ...state
+      }
     default:
       return state;
   }

@@ -32,6 +32,11 @@ export const verifyEvent = async(dispatch: Dispatch, ev: ITaskEventVerification)
       comment: ev.comment
     });
 
+    dispatch({
+      type: ActionType.ADD_VERIFICATION,
+      payload: ev
+    })
+
   notify("You have verified this event");
 }
 

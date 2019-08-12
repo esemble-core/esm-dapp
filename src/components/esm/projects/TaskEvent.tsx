@@ -2,7 +2,7 @@ import React from 'react'
 import { Card, Input, Button } from 'antd';
 import { IEventType, IVerifiableTaskEvent, ITaskEventTypes, ITaskEventVerification } from '../../../common/Interfaces';
 import { Store } from '../../../common/Store';
-import { addEvent, verifyEvent } from '../../../common/Actions';
+import { addEvent, verifyEvent, notifyWarn } from '../../../common/Actions';
 import useLoadUser from '../users/useLoadUser';
 
 
@@ -90,7 +90,7 @@ function ShowEventData(props: any) {
 
          {
            showVerify ?
-            <SubmitEventVerification />
+            <SubmitEventVerification event={event} />
            :
             ''
          }
@@ -102,12 +102,13 @@ function ShowEventData(props: any) {
 }
 
 
-function SubmitEventVerification(){
+function SubmitEventVerification(props: any){
   const { state, dispatch } = React.useContext(Store);
   useLoadUser();
   const user = state.currentUser;
   const task = state.currentTask;
   const [verificationText, setVerificationText] = React.useState<string>('');
+  const event: IVerifiableTaskEvent = props.event;
 
   return (
     <React.Fragment>
@@ -128,14 +129,18 @@ function SubmitEventVerification(){
         <Button
          type="dashed"
          onClick={ async() => {
-           console.log("verfication for event:");
+           //console.log("verfication for event:", event);
 
-           let eventVerification: ITaskEventVerification = {
-            comment: verificationText,
-            user_id: user.id,
-            verifiable_task_event_id: task.id
+           if (event && event.id){
+            let eventVerification: ITaskEventVerification = {
+              comment: verificationText,
+              user_id: user.id,
+              verifiable_task_event_id: event.id
+            }
+            await verifyEvent(dispatch, eventVerification);
+           }else {
+             notifyWarn('The event id was not available, there is data out of sync. Please refresh and try again.')
            }
-           await verifyEvent(dispatch, eventVerification);
          }}
         >
           Submit

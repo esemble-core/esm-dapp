@@ -44,6 +44,7 @@ export interface ITask {
 }
 
 export interface IVerifiableTaskEvent {
+  id?: number;
   task_id: number;
   event_type_id: number;
   attachment_link_text: string;
