@@ -2,9 +2,9 @@ import React from 'react'
 import { Store } from '../../../common/Store';
 import { idFromUrl } from '../../../utils/WebUtil';
 import { fetchTask, fetchEventTypes } from '../../../common/Actions';
-import { ITask, IUser, IEventType, IVerifiableTaskEvent } from './../../../common/Interfaces';
+import { ITask, IEventType, IVerifiableTaskEvent, ITaskEventTypes } from './../../../common/Interfaces';
 import { Card, Button } from 'antd';
-import TaskEventContainer from './TaskEventContainer';
+import TaskEvent from './TaskEvent';
 
 
 export default function ShowTask() {
@@ -14,6 +14,42 @@ export default function ShowTask() {
   const events: Array<IVerifiableTaskEvent>| undefined = task.events;
   const eventTypes: Array<IEventType> = state.eventTypes;
  
+  const [haveDesignEvent, setHaveDesignEvent] = React.useState(false);
+  const [haveTaskEvent, setHaveTaskEvent] = React.useState(false);
+  const [haveCompletionEvent, setHaveCompletionEvent] = React.useState(false);
+
+  /* That user clicked */
+  const [showDesign, setShowDesign] = React.useState(false);
+  const [showTask, setShowTask] = React.useState(false);
+  const [showComplete, setShowComplete] = React.useState(false);
+
+  /* event objects of specifc type */
+  const [designEvent, setDesignEvent] = React.useState<IVerifiableTaskEvent |undefined>(undefined);
+  const [taskEvent, setTaskEvent] = React.useState<IVerifiableTaskEvent |undefined>(undefined);
+  const [completionEvent, setCompletionEvent] = React.useState<IVerifiableTaskEvent |undefined>(undefined);
+
+
+  React.useEffect(() => {
+    
+    if (events){
+      events.forEach(e => {
+        //console.log("event id, task_id, attachment:", e.event_type_id, e.task_id, e.attachment_link_text);
+        if (e.event_type_id===ITaskEventTypes.DESIGN_REVIEW_ID){
+          setHaveDesignEvent(true);
+          setDesignEvent(e);
+        }else if (e.event_type_id===ITaskEventTypes.TASK_REVIEW_ID){
+          setHaveTaskEvent(true);
+          setTaskEvent(e);
+        }else if (e.event_type_id===ITaskEventTypes.COMPLETION_REVIEW_ID){
+          setHaveCompletionEvent(true);
+          setCompletionEvent(e);
+        }else {
+          console.error("event type exists, without matching the expected ids, there is a issue with serve state vs client state");
+        }
+      });
+    }
+  }, [events]);
+
 
   React.useEffect(() => {
     const loadTask = async() => {
@@ -48,10 +84,63 @@ export default function ShowTask() {
                 : ''
               }
           </p>
+
+        {!haveDesignEvent ? 
+          <Button
+            type="dashed"
+            onClick={ () => {
+              setShowDesign(true);
+            }}
+            >Submit Design Review
+            </Button>
+        :
+            ''
+        }
+
+        {!haveTaskEvent ? 
+            <Button
+              type="dashed"
+              onClick={ () => {
+                setShowTask(true);
+              }}
+              >Submit Task Review
+              </Button>
+          :
+              ''
+          }
+
+        {!haveCompletionEvent ? 
+            <Button
+              type="dashed"
+              onClick={ () => {
+                setShowComplete(true);
+              }}
+              >Submit Completion Review
+              </Button>
+          :
+              ''
+          }
+
         </Card>
       </div>
 
-      {events ? <TaskEventContainer events={events} /> : ''}
+      {haveDesignEvent || showDesign ? 
+          <TaskEvent event={designEvent} eventTypeId={ITaskEventTypes.DESIGN_REVIEW_ID} />
+        :
+          ''
+      }
+
+      {haveTaskEvent || showTask ? 
+          <TaskEvent event={taskEvent} eventTypeId={ITaskEventTypes.TASK_REVIEW_ID}/>
+        :
+          ''
+      }
+
+      {completionEvent || showComplete ? 
+          <TaskEvent event={completionEvent} eventTypeId={ITaskEventTypes.COMPLETION_REVIEW_ID}/>
+        :
+          ''
+      }
    </React.Fragment>
   )
 }
