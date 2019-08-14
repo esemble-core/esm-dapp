@@ -49,31 +49,36 @@ export default function ShowProject(props) {
               key={item.id}
             >
               <p className="strong-p">{item.name}</p> 
-             
-              <Button
-                className="ml-auto"
-                type="dashed"
-                onClick={async () => {
-                  //if they just added task, it won't have id (until refresh)
-                  if (item.id===undefined){
-                    notifyWarn("This task can not currently be worked on, it may be too new (try refreshing screen).");
-                  }
-                  
-                  await workOnTask(dispatch, user, item);
-                }}
-                >
-                Work on
-              </Button>
-              <Button
-                className="ml-auto"
-                type="dashed"
-                onClick={()=> {
-                    window.location = `/task/${item.id}`
-                  }}
-                >
-               View
-              </Button>
-             
+              { !item.done ?
+                <React.Fragment>
+                  <Button
+                    className="ml-auto"
+                    type="dashed"
+                    onClick={async () => {
+                      //if they just added task, it will be ther in state, but not 
+                      //have hit the server, so it won't have id (until refresh/refetch)
+                      if (item.id===undefined){
+                        notifyWarn("This task can not currently be worked on, it may be too new (try refreshing screen).");
+                      }
+                      
+                      await workOnTask(dispatch, user, item);
+                    }}
+                    >
+                    Work on
+                  </Button>
+                  <Button
+                    className="ml-auto"
+                    type="dashed"
+                    onClick={()=> {
+                        window.location = `/task/${item.id}`
+                      }}
+                    >
+                  View
+                  </Button>
+                </React.Fragment>
+                :
+                <p className="ml-auto">Complete</p>
+              }  
            
             </List.Item>
           )}
