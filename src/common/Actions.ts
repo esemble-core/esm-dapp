@@ -23,6 +23,15 @@ export const notifyWarn = (msg: string) => {
 };
 
 
+export const setTaskCompleted = async(dispatch: Dispatch, task: ITask) => {
+  const result = await Axios.post(
+    "/api/v1/set_task_completed",
+    {
+      id: task.id
+    });
+  notify("Task marked as complete");
+}
+
 export const verifyEvent = async(dispatch: Dispatch, ev: ITaskEventVerification) => {
   const result = await Axios.post(
     "/api/v1/create_event_verification",

@@ -1,10 +1,11 @@
 import React from 'react'
 import { Store } from '../../../common/Store';
 import { idFromUrl } from '../../../utils/WebUtil';
-import { fetchTask, fetchEventTypes } from '../../../common/Actions';
+import { fetchTask, fetchEventTypes, setTaskCompleted } from '../../../common/Actions';
 import { ITask, IEventType, IVerifiableTaskEvent, ITaskEventTypes } from './../../../common/Interfaces';
 import { Card, Button } from 'antd';
 import TaskEvent from './TaskEvent';
+
 
 
 export default function ShowTask() {
@@ -60,7 +61,6 @@ export default function ShowTask() {
   }, [events]);
 
 
-  
   /* just user names */
   React.useEffect(() => {
     if (task && task.working_on){     
@@ -69,17 +69,7 @@ export default function ShowTask() {
     }
   }, [task]);
 
-/*
-  React.useEffect(() => {
-    const loadVerifications = async() => {
-      console.log("loading verifications...");
-    }
-    if (task){
-      loadVerifications();
-    }
-  }, [task]);
 
-*/
   return (
     <React.Fragment>
       <div className="antDDefault">
@@ -129,6 +119,17 @@ export default function ShowTask() {
               </Button>
           :
               ''
+          }
+
+          {haveCompletionEvent ?
+             <Button
+             onClick={async() => {    
+                await setTaskCompleted(dispatch, task);          
+             }}
+             >Close Task as Complete
+             </Button>
+          :
+            ""
           }
 
         </Card>
