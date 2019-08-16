@@ -23,7 +23,13 @@ export const notifyWarn = (msg: string) => {
 };
 
 
-export const setTaskCompleted = async(dispatch: Dispatch, task: ITask) => {
+export const setTaskCompleted = async(dispatch: Dispatch, task: ITask, user: IUser) => {
+  let haveUser: boolean = userCheck(user);
+
+  if (!haveUser){
+    return;
+  }
+
   const result = await Axios.post(
     "/api/v1/set_task_completed",
     {
@@ -32,7 +38,13 @@ export const setTaskCompleted = async(dispatch: Dispatch, task: ITask) => {
   notify("Task marked as complete");
 }
 
-export const verifyEvent = async(dispatch: Dispatch, ev: ITaskEventVerification) => {
+export const verifyEvent = async(dispatch: Dispatch, ev: ITaskEventVerification, user:IUser) => {
+  let haveUser: boolean = userCheck(user);
+
+  if (!haveUser){
+    return;
+  }
+
   const result = await Axios.post(
     "/api/v1/create_event_verification",
     {
@@ -103,13 +115,21 @@ export const fetchTask = async(dispatch: Dispatch, taskId: string| undefined) =>
   })
 }
 
-
-export const workOnTask = async (dispatch: Dispatch, user: IUser, task: ITask) => {
+const userCheck = (user: IUser): boolean => {
   if (user===undefined || user.id === undefined){
     notifyError("Please register on the \"my profile\" page and log into meta mask to be able to work on this task");
+    return false;
+  }
+  return true;
+}
+
+export const workOnTask = async (dispatch: Dispatch, user: IUser, task: ITask) => {
+  let haveUser:boolean = userCheck(user);
+
+  if (!haveUser){
     return;
   }
-  //console.log("work on task, for user.id: ", user.id, " taskid: ", task.id);
+
   const result = await Axios.post(
       "/api/v1/user_working_on_task",
       {
@@ -193,6 +213,7 @@ export const addTask = async (dispatch: Dispatch, task: ITask) => {
   });
   notify("task added successfully");
 }
+
 
 export const fetchProject = async (dispatch: Dispatch, projectId:number) => {
   try{

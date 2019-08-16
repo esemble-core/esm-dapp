@@ -5,6 +5,7 @@ import { fetchTask, fetchEventTypes, setTaskCompleted } from '../../../common/Ac
 import { ITask, IEventType, IVerifiableTaskEvent, ITaskEventTypes } from './../../../common/Interfaces';
 import { Card, Button } from 'antd';
 import TaskEvent from './TaskEvent';
+import useLoadUser from '../users/useLoadUser';
 
 
 
@@ -28,6 +29,10 @@ export default function ShowTask() {
   const [designEvent, setDesignEvent] = React.useState<IVerifiableTaskEvent |undefined>(undefined);
   const [taskEvent, setTaskEvent] = React.useState<IVerifiableTaskEvent |undefined>(undefined);
   const [completionEvent, setCompletionEvent] = React.useState<IVerifiableTaskEvent |undefined>(undefined);
+
+
+  useLoadUser();
+  const user = state.currentUser;
 
 
   React.useEffect(() => {
@@ -124,7 +129,7 @@ export default function ShowTask() {
           {haveCompletionEvent ?
              <Button
              onClick={async() => {    
-                await setTaskCompleted(dispatch, task);          
+                await setTaskCompleted(dispatch, task, user);          
              }}
              >Close Task as Complete
              </Button>

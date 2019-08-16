@@ -136,7 +136,7 @@ function SubmitEventVerification(props: any){
               user_id: user.id,
               verifiable_task_event_id: event.id
             }
-            await verifyEvent(dispatch, eventVerification);
+            await verifyEvent(dispatch, eventVerification, user);
            }else {
              notifyWarn('The event id was not available, there is data out of sync. Please refresh and try again.')
            }
