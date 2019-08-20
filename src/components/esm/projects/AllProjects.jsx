@@ -2,6 +2,8 @@ import React from 'react'
 import { List, Card } from 'antd';
 import { fetchProjects } from '../../../common/Actions';
 import { Store } from '../../../common/Store';
+import { sliceDots } from '../../../utils/StrUtil';
+import { appendedLookup, FUNDING_KEY, EN } from '../../../common/Lookup';
 
 
 export default function AllProjects() {
@@ -29,10 +31,10 @@ export default function AllProjects() {
               key={item.name}
             >
               
-              <a href={`/project/${item.id}`}>{item.name}</a>    
-              <p>{" | "}{item.description}</p>     
-              <p>{" | "}{item.funding}</p>   
-              <p>{" | "}{item.lifecycle}</p>            
+              <a href={`/project/${item.id}`}>{sliceDots(item.name, 25)}</a>    
+              <p className="ml-auto">{sliceDots(item.description, 25)}</p>     
+              <p className="ml-auto">{appendedLookup(EN, FUNDING_KEY, item.funding)}</p>   
+              <p className="ml-auto">{appendedLookup(EN, FUNDING_KEY, item.lifecycle)}</p>            
             </List.Item>
           )}
         />    
