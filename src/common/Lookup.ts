@@ -1,7 +1,12 @@
 export const EN = "en";
 export const FUNDING_KEY = "FUNDING";
 export const LIFECYCLE_KEY = "LIFECYCLE";
+export const DEFAULT_LOCALE = EN;
 
+/* short cut function */
+export function lu (key: string): string {
+  return lookup(DEFAULT_LOCALE, key);
+}
 
 export function appendedLookup (locale: string, key: string, appendVal: string): string {
   return lookup(locale, (key + '_' + appendVal));
@@ -19,15 +24,15 @@ export function lookup (locale: string, key: string): string {
       return '> 500k < 2M'
     case "FUNDING_5":
       return '> 2M < 5M'
-    case "LIFECYCLE_1":
+    case "LIFECYCLE_0":
       return 'Not Accepted'
-    case "LIFECYCLE_2":
+    case "LIFECYCLE_1":
       return 'Proposed'
-    case "LIFECYCLE_3":
+    case "LIFECYCLE_2":
       return 'Approved'
-    case "LIFECYCLE_4":
+    case "LIFECYCLE_3":
       return 'Complete'
-    case "LIFECYCLE_5":
+    case "LIFECYCLE_4":
       return 'Archived'
     default:
       return "ERROR - FAILED LOOKUP";
