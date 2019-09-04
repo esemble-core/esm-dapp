@@ -22,6 +22,19 @@ export const notifyWarn = (msg: string) => {
   }
 };
 
+/*
+  direct return
+*/
+export const rpcStatus = async():Promise<boolean> => {
+  try{
+    const result = await Axios.get('/api/v1/status');
+    return true;
+  }catch (error){
+    console.error("Could not connect to server on rpc check");
+    return false;
+  }
+}
+
 
 export const setTaskCompleted = async(dispatch: Dispatch, task: ITask, user: IUser) => {
   let haveUser: boolean = userCheck(user);
