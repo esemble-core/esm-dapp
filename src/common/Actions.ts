@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { ActionType, Store } from "./Store";
 import Axios from "axios";
 import { Dispatch, ITask, IUser, IProject, IVerifiableTaskEvent, ITaskEventVerification } from './Interfaces';
+import { LIFECYCLE_APPROVED, LIFECYCLE_NOT_ACCEPTED } from "../common/Lookup";
 
 
 
@@ -27,12 +28,31 @@ export const notifyWarn = (msg: string) => {
 */
 export const rpcStatus = async():Promise<boolean> => {
   try{
-    const result = await Axios.get('/api/v1/status');
+    const result = await Axios.get('/api/v1/projects');
     return true;
   }catch (error){
     console.error("Could not connect to server on rpc check");
     return false;
   }
+}
+
+//use a project instead, and dispatch?
+export const approveProject = async(project: IProject) => {
+  project.lifecycle = LIFECYCLE_APPROVED;
+  const result = await Axios.put(
+    `/api/v1/projects/${project.id}`,
+    {
+      lifecycle: project.lifecycle
+    });
+}
+
+export const rejectProject = async(project: IProject) => {
+  project.lifecycle = LIFECYCLE_NOT_ACCEPTED;
+  const result = await Axios.put(
+    `/api/v1/projects/${project.id}`,
+    {
+      lifecycle: project.lifecycle
+    });
 }
 
 

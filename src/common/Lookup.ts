@@ -3,6 +3,10 @@ export const FUNDING_KEY = "FUNDING";
 export const LIFECYCLE_KEY = "LIFECYCLE";
 export const DEFAULT_LOCALE = EN;
 
+export const LIFECYCLE_NOT_ACCEPTED = 0;
+export const LIFECYCLE_APPROVED = 2;
+
+
 /* short cut function */
 export function lu (key: string): string {
   return lookup(DEFAULT_LOCALE, key);
