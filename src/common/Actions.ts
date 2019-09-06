@@ -44,6 +44,7 @@ export const approveProject = async(project: IProject) => {
     {
       lifecycle: project.lifecycle
     });
+  notify("project updated to - approved", false);
 }
 
 export const rejectProject = async(project: IProject) => {
@@ -53,6 +54,7 @@ export const rejectProject = async(project: IProject) => {
     {
       lifecycle: project.lifecycle
     });
+  notify("project updated to - not accepted", false);
 }
 
 
