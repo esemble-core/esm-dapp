@@ -12,7 +12,7 @@ export default function AllProjects() {
 
   React.useEffect(() => {
     const loadProjects = async() => {
-      console.log("loading projects from api");
+      //console.log("loading projects from api");
       await fetchProjects(dispatch);
     }
     loadProjects();
@@ -38,7 +38,6 @@ export default function AllProjects() {
                 className="ml-auto"
                 type="dashed"
                 onClick={async() => {
-                    console.log("approve", item.id);
                     await approveProject(item);
                     await fetchProjects(dispatch, true);
                   }
@@ -49,7 +48,6 @@ export default function AllProjects() {
               <Button className="ml-auto"
                 type="dashed"
                 onClick={async() => {
-                    console.log("reject", item.id);
                     await rejectProject(item);
                     await fetchProjects(dispatch, true);
                   }
@@ -64,21 +62,3 @@ export default function AllProjects() {
   </div>
   )
 }
-
-
-/*
-<Button
-                    className="ml-auto"
-                    type="dashed"
-                    onClick={async () => {
-                      //if they just added task, it will be ther in state, but not 
-                      //have hit the server, so it won't have id (until refresh/refetch)
-                      if (item.id===undefined){
-                        notifyWarn("This task can not currently be worked on, it may be too new (try refreshing screen).");
-                      }
-                      
-                      await workOnTask(dispatch, user, item);
-                    }}
-                    >
-
-*/

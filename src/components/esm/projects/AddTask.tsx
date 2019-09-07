@@ -1,7 +1,6 @@
 import React from 'react'
 import { Card, Button, Input } from 'antd';
-import { notify, addTask } from '../../../common/Actions';
-import Axios from 'axios';
+import { addTask } from '../../../common/Actions';
 import { ITask } from '../../../common/Interfaces';
 import { Store } from '../../../common/Store';
 
@@ -10,7 +9,6 @@ export default function AddTask(props:any) {
   const [name, setName] = React.useState('');
   const projectId = props.projectId;
 
-  console.log("projectid", projectId);
 
   return (
     <div className="antDDefault">
