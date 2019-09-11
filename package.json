@@ -14,6 +14,7 @@
     "@types/react": "16.8.13",
     "@types/react-dom": "16.8.3",
     "@types/web3": "^1.0.19",
+    "@universal-login/sdk": "^0.3.34",
     "antd": "^3.20.1",
     "axios": "^0.19.0",
     "dotenv": "^7.0.0",
