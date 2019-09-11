@@ -31,6 +31,7 @@
     "web3-react": "^5.0.4"
   },
   "scripts": {
+    "start:dev": "universal-login start:dev",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -48,6 +49,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@universal-login/ops": "^0.3.34",
     "eslint-config-prettier": "^4.3.0",
     "eslint-plugin-prettier": "^3.1.0",
     "husky": "^2.4.0",
