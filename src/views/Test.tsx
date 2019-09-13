@@ -2,7 +2,8 @@ import React from 'react'
 import Web3Provider from 'web3-react';
 import useWeb3Config from '../components/chainstate/useWeb3Config';
 import EsembleTestData from '../components/test/EsembleTestData';
-import MessageSigning from '../components/test/MessageSigning';
+import MessageSigningTest from '../components/test/MessageSigningTest';
+import UniversalLoginTest from '../components/test/UniversalLoginTest';
 
 
 
@@ -19,7 +20,7 @@ export default function Test() {
             <div className="heading-underline"></div>
             <Web3Provider connectors={web3Config.connectors} libraryName={web3Config.libraryName} web3Api={web3Config.web3Api}> 
               
-              <MessageSigning />
+              <MessageSigningTest />
               
             </Web3Provider>
           </div>

@@ -4,7 +4,7 @@ import useReactWeb3Library from '../chainstate/useReactWeb3Library';
 import useReactWeb3 from '../chainstate/useReactWeb3';
 
 
-export default function MessageSigning() {
+export default function MessageSigningTest() {
   const [message, setMessage] = React.useState(''); 
   const [signature, setSignature] = React.useState('');
   const [verified, setVerified] = React.useState(false);

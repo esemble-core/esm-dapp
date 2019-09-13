@@ -19,6 +19,7 @@ import StayInTouch from './views/StayInTouch';
 import HowItWorks from './views/HowItWorks';
 import Project from './views/Project';
 import Task from "./views/Task";
+import MetaTest from "./views/MetaTest";
 
 
 const RouterPage = (props: { pageComponent: JSX.Element } & RouteComponentProps) => props.pageComponent;
@@ -38,6 +39,7 @@ ReactDOM.render(
             <RouterPage pageComponent={<Profile />} path="/my_profile" />    
             <RouterPage pageComponent={<Admin />} path="/admin" />
             <RouterPage pageComponent={<Test />} path="/test" />  
+            <RouterPage pageComponent={<MetaTest />} path="/metatest" />  
         </App>
       </Router>
   </StoreProvider>,
