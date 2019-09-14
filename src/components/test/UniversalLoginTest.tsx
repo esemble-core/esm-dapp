@@ -2,7 +2,8 @@ import React from 'react'
 import { Card, Button } from 'antd';
 import { notify } from '../../common/Actions';
 import UniversalLoginSDK from '@universal-login/sdk';
-import ethers from 'ethers';
+import { ethers } from 'ethers';
+import { Provider } from 'ethers/providers';
 
 
 export default function UniversalLoginTest() {
@@ -30,13 +31,14 @@ export default function UniversalLoginTest() {
                 //const universalLoginSDK = new UniversalLoginSDK(relayerUrl, jsonRpcUrl);
                 sdk.start();
 
-                const privateKey = await sdk.connect(CONTRACT_ADDRESS);
-                console.log("privatekey" + JSON.stringify(privateKey));
-                
-                /*const privateKeyString: string = JSON.stringify(privateKey);
+                const privateKeyObj = await sdk.connect(CONTRACT_ADDRESS);
+                const privateKeyString: string = JSON.stringify(privateKeyObj.privateKey);
 
-                const key = new ethers.Wallet(privateKeyString).address;
-                const filter =
+                console.log("privatekey:" + privateKeyString);
+
+                let customHttpProvider = new ethers.providers.JsonRpcProvider(JSON_RPC_URL);
+                const wallet = new ethers.Wallet(privateKeyObj.privateKey, customHttpProvider);
+  /*              const filter =
                   {
                     contractAddress: CONTRACT_ADDRESS,
                     key
@@ -49,10 +51,7 @@ export default function UniversalLoginTest() {
                     {
                       console.log(`${keyInfo.key} now has permission to manage wallet contract`);
                   });
-
                 */
-
-                
               }}
             >
           Generate and Deploy
