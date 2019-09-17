@@ -4,8 +4,8 @@
   "private": true,
   "proxy": "http://localhost:3210",
   "dependencies": {
+    "@portis/web3": "^2.0.0-beta.43",
     "@reach/router": "^1.2.1",
-    "@types/antd": "^1.0.0",
     "@types/dotenv": "^6.1.1",
     "@types/jest": "24.0.11",
     "@types/lodash": "^4.14.123",
@@ -14,13 +14,11 @@
     "@types/react": "16.8.13",
     "@types/react-dom": "16.8.3",
     "@types/web3": "^1.0.19",
-    "@universal-login/sdk": "^0.3.39",
     "antd": "^3.20.1",
     "axios": "^0.19.0",
     "dotenv": "^7.0.0",
     "ethers": "^4.0.37",
-    "lodash": "^4.17.11",
-    "loom-js": "^1.51.0",
+    "lodash": "^4.17.15",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "2.1.8",
@@ -49,7 +47,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@universal-login/ops": "^0.3.34",
     "eslint-config-prettier": "^4.3.0",
     "eslint-plugin-prettier": "^3.1.0",
     "husky": "^2.4.0",
