@@ -10,7 +10,7 @@ const ETH_NETWORK_STR = 'rinkeby';
 export default function MetaTest() {
   //const portis = new Portis(PORTIS_DAPP_KEY, ETH_NETWORK_STR);
   //const web3 = new Web3(portis.provider);
-  const portis = new Portis(PORTIS_DAPP_KEY, ETH_NETWORK_STR)
+  const portis = new Portis(PORTIS_DAPP_KEY, ETH_NETWORK_STR, { gasRelay: true });
   
 
   return (  
@@ -39,6 +39,7 @@ export default function MetaTest() {
             type="ghost"
             onClick={()=> {
               console.log("showing account");
+              portis.showPortis();
             }}
             >
             See Account
